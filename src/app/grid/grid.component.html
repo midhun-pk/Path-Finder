@@ -1,1 +1,11 @@
-<p>grid works!</p>
+<div class="wrapper" #grid>
+    <table id="grid">
+        <tbody>
+            <tr [attr.id]="'row-'+i" *ngFor="let nodes of gridArray; index as i">
+                <td *ngFor="let node of nodes" [attr.id]="node.id" [attr.class]="node.status" (mouseup)="onMouseUp()"
+                    (mousedown)="onMouseDown($event, node)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
