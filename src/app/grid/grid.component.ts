@@ -75,7 +75,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   onMouseLeave() {
     if (this.isMousePressed) {
-      console.log('still');
+
     }
   }
 
