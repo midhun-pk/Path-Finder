@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Node } from '../models/node.model';
+import { UnweightedAlgorithmsService } from '../services/unweighted-algorithms.service';
 
 @Component({
   selector: 'app-grid',
@@ -15,15 +16,19 @@ export class GridComponent implements OnInit, AfterViewInit {
   start: string;
   target: string;
   isMousePressed: boolean;
-  pressedNodeId: string;
   pressedNodeStatus: string;
-  selectedNodeId: string;
+  previousNode: Node;
+  previousElement: HTMLElement;
+  previousNodeStatus: string;
 
   nodeHeight = 25;
   nodeWidth = 26;
   gridArray: Node[][] = [];
+  nodes: { [id: string]: Node } = {};
+  specialNodeStatuses = ['start', 'target'];
+  nodesToAnimate = [];
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, private unweightedAlgorithms: UnweightedAlgorithmsService) { }
 
   ngOnInit() {
   }
@@ -52,30 +57,46 @@ export class GridComponent implements OnInit, AfterViewInit {
         const node = new Node();
         node.id = id;
         node.status = status;
-        node.previousStatus = 'normal';
         nodeArray.push(node);
+        this.nodes[id] = node;
       }
       this.gridArray.push(nodeArray);
     }
   }
 
-  onMouseDown(event: Event, currentNode: Node) {
-    this.isMousePressed = true;
-    this.pressedNodeId = currentNode.id;
-    this.pressedNodeStatus = currentNode.status;
+  onMouseDown(event: Event, currentNode: Node, element: HTMLElement) {
     event.preventDefault();
+    this.isMousePressed = true;
+    if (this.specialNodeStatuses.includes(currentNode.status)) {
+      this.pressedNodeStatus = currentNode.status;
+    } else {
+      this.pressedNodeStatus = 'normal';
+      this.changeNormalNode(currentNode, element);
+    }
   }
 
-  onMouseUp() {
+  onMouseUp(currentNode: Node) {
     this.isMousePressed = false;
+    switch (this.pressedNodeStatus) {
+      case 'target': this.target = currentNode.id; break;
+      case 'start': this.start = currentNode.id; break;
+      default: break;
+    }
+    this.pressedNodeStatus = 'normal';
   }
 
   onMouseEnter(currentNode: Node, element: HTMLElement) {
-    if (this.isMousePressed) {
-      if (this.pressedNodeStatus === 'target') {
-        this.target = currentNode.id;
-        this.changeSpecialNode(currentNode, element);
+    if (!this.isMousePressed) { return; }
+    if (this.specialNodeStatuses.includes(this.pressedNodeStatus)) {
+      // If dragging a special node
+      this.changeSpecialNode(currentNode, element);
+      switch (this.pressedNodeStatus) {
+        case 'target': this.target = currentNode.id; break;
+        case 'start': this.start = currentNode.id; break;
+        default: break;
       }
+    } else {
+      this.changeNormalNode(currentNode, element);
     }
   }
 
@@ -86,15 +107,49 @@ export class GridComponent implements OnInit, AfterViewInit {
   }
 
   changeSpecialNode(currentNode: Node, element: HTMLElement) {
-    if (currentNode.status !== this.pressedNodeStatus) {
-      currentNode.previousStatus = currentNode.status;
-      currentNode.status = this.pressedNodeStatus;
-      element.className = this.pressedNodeStatus;
-    } else if (currentNode.status === this.pressedNodeStatus) {
-      this.selectedNodeId = currentNode.id;
-      currentNode.status = currentNode.previousStatus;
-      element.className = currentNode.previousStatus;
+    if (!this.specialNodeStatuses.includes(currentNode.status)) { // Current node is normal node (On enter)
+      if (this.previousNode) {
+        this.previousNode.status = this.previousNodeStatus;
+        this.previousNode = null;
+        this.previousElement = null;
+        this.previousNodeStatus = currentNode.status;
+        currentNode.status = this.pressedNodeStatus;
+        element.className = this.pressedNodeStatus;
+      }
+    } else if (currentNode.status !== this.pressedNodeStatus) { // Current node is special but different status (On enter & leave)
+      if (this.previousNode) {
+        this.previousElement.className = this.pressedNodeStatus;
+        this.previousNode.status = this.pressedNodeStatus;
+      }
+    } else if (currentNode.status === this.pressedNodeStatus) { // Current node is special and same status (On leave)
+      this.previousElement = element;
+      this.previousNode = currentNode;
+      element.className = this.previousNodeStatus;
+      currentNode.status = this.previousNodeStatus;
     }
+  }
+
+  changeNormalNode(currentNode: Node, element: HTMLElement) {
+    if (!this.specialNodeStatuses.includes(currentNode.status)) {
+      const status = currentNode.status === 'wall' ? 'noraml' : 'wall';
+      currentNode.status = status;
+      element.className = status;
+    }
+  }
+
+  clearWalls() {
+    Object.keys(this.nodes).forEach(id => {
+      const node = this.nodes[id];
+      const nodeElement = document.getElementById(id);
+      if (node.status === 'wall') {
+        node.status = 'normal';
+        nodeElement.className = 'normal';
+      }
+    });
+  }
+
+  runAlgorithm() {
+    const success = this.unweightedAlgorithms.bfs(this.start, this.target, this.nodes, this.nodesToAnimate, this.gridArray);
   }
 
 }

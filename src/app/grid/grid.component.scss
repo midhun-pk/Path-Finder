@@ -24,6 +24,19 @@
         background-size: contain;
         animation: zoom-in-out .5s ease-out 0s 1 alternate forwards running;
     }
+
+    .start {
+        background-image: url("../../assets/images/start.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        animation: zoom-in-out .5s ease-out 0s 1 alternate forwards running;
+    }
+
+    .wall {
+        background-color: #D6D6D8;
+        animation: zoom-in-out .5s ease-out 0s 1 alternate forwards running;
+    }
 }
 
 @keyframes zoom-in-out {
