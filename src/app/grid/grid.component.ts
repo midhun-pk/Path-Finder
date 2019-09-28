@@ -15,7 +15,9 @@ export class GridComponent implements OnInit, AfterViewInit {
   start: string;
   target: string;
   isMousePressed: boolean;
-  pressedNode: Node;
+  pressedNodeId: string;
+  pressedNodeStatus: string;
+  selectedNodeId: string;
 
   nodeHeight = 25;
   nodeWidth = 26;
@@ -38,10 +40,11 @@ export class GridComponent implements OnInit, AfterViewInit {
       const nodeArray: Node[] = [];
       for (let j = 0; j < this.columns; j++) {
         const id = `${i}-${j}`;
-        let status = 'unvisited';
+        let status = 'normal';
         if (i === Math.floor(this.rows / 2) && j === Math.floor(this.columns / 4)) {
           this.start = id;
           status = 'start';
+
         } else if (i === Math.floor(this.rows / 2) && j === Math.floor(3 * this.columns / 4)) {
           this.target = id;
           status = 'target';
@@ -49,15 +52,17 @@ export class GridComponent implements OnInit, AfterViewInit {
         const node = new Node();
         node.id = id;
         node.status = status;
+        node.previousStatus = 'normal';
         nodeArray.push(node);
       }
       this.gridArray.push(nodeArray);
     }
   }
 
-  onMouseDown(event: Event, node: Node) {
+  onMouseDown(event: Event, currentNode: Node) {
     this.isMousePressed = true;
-    this.pressedNode = node;
+    this.pressedNodeId = currentNode.id;
+    this.pressedNodeStatus = currentNode.status;
     event.preventDefault();
   }
 
@@ -65,17 +70,30 @@ export class GridComponent implements OnInit, AfterViewInit {
     this.isMousePressed = false;
   }
 
-  onMouseEnter(node: Node) {
+  onMouseEnter(currentNode: Node, element: HTMLElement) {
     if (this.isMousePressed) {
-      if (this.pressedNode.status === 'target') {
-        this.target = node.id;
+      if (this.pressedNodeStatus === 'target') {
+        this.target = currentNode.id;
+        this.changeSpecialNode(currentNode, element);
       }
     }
   }
 
-  onMouseLeave() {
+  onMouseLeave(currentNode: Node, element: HTMLElement) {
     if (this.isMousePressed) {
+      this.changeSpecialNode(currentNode, element);
+    }
+  }
 
+  changeSpecialNode(currentNode: Node, element: HTMLElement) {
+    if (currentNode.status !== this.pressedNodeStatus) {
+      currentNode.previousStatus = currentNode.status;
+      currentNode.status = this.pressedNodeStatus;
+      element.className = this.pressedNodeStatus;
+    } else if (currentNode.status === this.pressedNodeStatus) {
+      this.selectedNodeId = currentNode.id;
+      currentNode.status = currentNode.previousStatus;
+      element.className = currentNode.previousStatus;
     }
   }
 
