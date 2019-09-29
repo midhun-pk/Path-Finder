@@ -23,6 +23,7 @@ export class UnweightedAlgorithmsService {
       const neighbors = this.getNeighbors(currentNode, nodes, grid);
       neighbors.forEach(neighbor => {
         if (!nodes[neighbor].visited && !deque.includes(nodes[neighbor])) {
+          nodes[neighbor].previousNode = currentNode.id;
           deque.push(nodes[neighbor]);
         }
       });
