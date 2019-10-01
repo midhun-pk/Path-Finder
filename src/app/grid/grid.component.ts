@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Node } from '../models/node.model';
 import { UnweightedAlgorithmsService } from '../services/unweighted-algorithms.service';
+import { VisualizerService } from '../services/visualizer.service';
 
 @Component({
   selector: 'app-grid',
@@ -28,7 +29,11 @@ export class GridComponent implements OnInit, AfterViewInit {
   specialNodeStatuses = ['start', 'target'];
   nodesToAnimate = [];
 
-  constructor(private cdr: ChangeDetectorRef, private unweightedAlgorithms: UnweightedAlgorithmsService) { }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private unweightedAlgorithms: UnweightedAlgorithmsService,
+    private visualizerService: VisualizerService
+    ) { }
 
   ngOnInit() {
   }
@@ -150,6 +155,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   runAlgorithm() {
     const success = this.unweightedAlgorithms.bfs(this.start, this.target, this.nodes, this.nodesToAnimate, this.gridArray);
+    this.visualizerService.visualize(this.nodesToAnimate);
   }
 
 }

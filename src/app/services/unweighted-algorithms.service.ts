@@ -8,7 +8,7 @@ export class UnweightedAlgorithmsService {
 
   constructor() { }
 
-  bfs(start: string, target: string, nodes: { [id: string]: Node }, nodesToAnimate: Node[], grid: Node[][]) {
+  bfs(start: string, target: string, nodes: { [id: string]: Node }, nodesToAnimate: Node[], grid: Node[][]): boolean {
     if (!start || !target || start === target) {
       return false;
     }
