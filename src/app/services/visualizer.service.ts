@@ -3,7 +3,11 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class GridAnimationsService {
+export class VisualizerService {
 
   constructor() { }
+
+  visualize(nodesToAnimate) {
+    console.log(nodesToAnimate);
+  }
 }
