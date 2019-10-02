@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { Node } from '../models/node.model';
-import { UnweightedAlgorithmsService } from '../services/unweighted-algorithms.service';
-import { VisualizerService } from '../services/visualizer.service';
+import { Node } from '../../models/node.model';
+import { UnweightedAlgorithmsService } from '../../services/unweighted-algorithms.service';
+import { VisualizerService } from '../../services/visualizer.service';
 
 @Component({
   selector: 'app-grid',

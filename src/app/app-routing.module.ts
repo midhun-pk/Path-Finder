@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { VisualizerComponent } from './visualizer/visualizer.component';
+import { VisualizerComponent } from './components/visualizer/visualizer.component';
 
 
 const routes: Routes = [
