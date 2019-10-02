@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VisualizerService } from './visualizer.service';
+import { PathFinderService } from './path-finder.service';
 
-describe('VisualizerService', () => {
+describe('PathFinderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: VisualizerService = TestBed.get(VisualizerService);
+    const service: PathFinderService = TestBed.get(PathFinderService);
     expect(service).toBeTruthy();
   });
 });

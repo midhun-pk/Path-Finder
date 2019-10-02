@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PathFinderService } from 'src/app/services/path-finder.service';
 
 @Component({
   selector: 'app-visualizer',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisualizerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pathFinderService: PathFinderService) { }
 
   ngOnInit() {
   }
 
+  onClearWalls() {
+    this.pathFinderService.clearWalls();
+  }
+
+  onVisualize() {
+    this.pathFinderService.runAlgorithm();
+  }
 }
