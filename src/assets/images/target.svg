@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53">
     <g>
-        <ellipse stroke="#FAC921" ry="22.5" rx="22.5" id="target-outer" cy="26.249999" cx="26.5" stroke-width="5.5"
+        <ellipse stroke="#E9297A" ry="22.5" rx="22.5" id="target-outer" cy="26.249999" cx="26.5" stroke-width="5.5"
             fill="none" />
-        <ellipse stroke="#FAC921" ry="7.368421" rx="7" id="target-inner" cy="26.11842" cx="26.5" fill-opacity="null"
+        <ellipse stroke="#E9297A" ry="7.368421" rx="7" id="target-inner" cy="26.11842" cx="26.5" fill-opacity="null"
             stroke-opacity="null" stroke-width="14.5" fill="#fff" />
     </g>
 </svg>

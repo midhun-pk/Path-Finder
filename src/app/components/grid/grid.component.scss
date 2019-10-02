@@ -7,6 +7,9 @@
     width: 100%;
     height: 100%;
     border-collapse: collapse;
+    background: var(--color-4);
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0, .2);
 
     td {
         min-width: 25px;
@@ -14,7 +17,7 @@
     }
 
     &, td {
-        border: 1px solid #BFBFBF;
+        border: 1px solid var(--color-3);
     }
 
     .target {
@@ -22,7 +25,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
-        animation: zoom-in-out .5s ease-out 0s 1 alternate forwards running;
+        animation: special-node-animation .5s ease-out 0s 1 alternate forwards running;
     }
 
     .start {
@@ -30,16 +33,16 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
-        animation: zoom-in-out .5s ease-out 0s 1 alternate forwards running;
+        animation: special-node-animation .5s ease-out 0s 1 alternate forwards running;
     }
 
     .wall {
-        background-color: #D6D6D8;
-        animation: zoom-in-out .5s ease-out 0s 1 alternate forwards running;
+        background-color: var(--color-2);
+        animation: wall-animation .5s ease-out 0s 1 alternate forwards running;
     }
 }
 
-@keyframes zoom-in-out {
+@keyframes special-node-animation {
     0% {
         transform: scale(.2);
     }
@@ -49,5 +52,18 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes wall-animation {
+    0% {
+        transform: scale(.2);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.05);
     }
 }

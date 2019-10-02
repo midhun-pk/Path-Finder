@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { VisualizerComponent } from './components/visualizer/visualizer.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
-  { path: 'visualize', component: VisualizerComponent }
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({

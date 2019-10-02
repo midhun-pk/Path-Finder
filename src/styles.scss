@@ -4,15 +4,24 @@
     src: url('assets/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf') format('truetype');
 }
 
+:root {
+    --color-1: #E7E7E8; 
+    --color-2: #0B1F2A;
+    --color-3: #1EA099;
+    --color-4: #F3F3F3;
+    --color-5: #FFFFFF;
+}
+
 body {
-    background: #F4F7F6;
+    background: var(--color-1);
     width: 100%;
     height: 100%;
     font-family: "Source Sans Pro";
     -webkit-font-smothing: antialiased;
     margin: 0px;
+    font-size: 16px;
+    color: var(--color-5);
 }
-
 
 html {
     width: 100%;

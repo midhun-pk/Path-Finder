@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+
+    .navbar {
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        background: var(--color-2);
+        display: flex;
+        z-index: 2;
+        box-shadow: 0px 5px 5px rgb(0, 0, 0, .2);
+    }
+    
+    .content {
+        padding-top: 50px;
+        height: 100%;
+        width: 100%;
+    }
+}

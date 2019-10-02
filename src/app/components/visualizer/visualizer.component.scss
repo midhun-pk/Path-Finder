@@ -2,16 +2,9 @@
     display: flex;
     width: 100%;
     height: 100%;
-
-    .side-bar {
-        height: 100%;
-        width: 80px;
-        background-color: #BFBFBF;
-        opacity: 0.6;
-        flex-shrink: 0;
-    }
     
     .playground {
+        padding: 50px 100px;
         height: 100%;
         width: 100%;
     }
