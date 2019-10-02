@@ -11,6 +11,11 @@
         height: 100%;
         display: flex;
         margin-left: 100px;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba($color: #FFFFFF, $alpha: 0.1)
+        }
 
         .logo {
             width: 50px;
