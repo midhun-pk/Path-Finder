@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UnweightedAlgorithmsService } from './unweighted-algorithms.service';
 import { Grid } from '../models/grid.model';
+import { GridAnimationService } from './grid-animation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,14 @@ export class PathFinderService {
   grid: Grid;
 
   constructor(
-    private unweightedAlgorithms: UnweightedAlgorithmsService
+    private unweightedAlgorithms: UnweightedAlgorithmsService,
+    private gridAnimationService: GridAnimationService
   ) { }
+
+  setGrid(grid: Grid) {
+    this.grid = grid;
+    this.gridAnimationService.grid = grid;
+  }
 
   clearWalls() {
     Object.keys(this.grid.nodes).forEach(id => {
@@ -25,6 +32,5 @@ export class PathFinderService {
 
   runAlgorithm() {
     const success = this.unweightedAlgorithms.bfs(this.grid);
-    console.log(this.grid);
   }
 }

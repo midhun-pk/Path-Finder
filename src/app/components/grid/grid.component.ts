@@ -62,7 +62,7 @@ export class GridComponent implements OnInit, AfterViewInit {
       this.gridArray.push(nodeArray);
     }
     this.grid.gridArray = this.gridArray;
-    this.pathFinderService.grid = this.grid;
+    this.pathFinderService.setGrid(this.grid);
   }
 
   onMouseDown(event: Event, currentNode: Node, element: HTMLElement) {
