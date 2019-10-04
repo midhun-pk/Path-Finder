@@ -6,6 +6,7 @@ import { Grid } from '../models/grid.model';
 })
 export class GridAnimationService {
   grid: Grid;
+  relevantClassNames = ['start', 'target', 'visitedStartNode'];
 
   constructor() { }
 
@@ -18,7 +19,21 @@ export class GridAnimationService {
       if (index === 0) {
         const startElement = document.getElementById(this.grid.start);
         startElement.className = 'visitedStartNode';
+      } else if (index === this.grid.nodesToAnimate.length) {
+        return;
+      } else {
+        const currentNode = this.grid.nodesToAnimate[index];
+        const currentElement = document.getElementById(currentNode.id);
+        if (!this.relevantClassNames.includes(currentElement.className)) {
+          currentElement.className = 'current';
+        }
+        const previousNode = this.grid.nodesToAnimate[index - 1];
+        const previousElement = document.getElementById(previousNode.id);
+        if (!this.relevantClassNames.includes(previousElement.className)) {
+          previousElement.className = 'visited';
+        }
       }
-    }, 40);
+      this.timeout(index + 1);
+    }, 0);
   }
 }
