@@ -44,8 +44,8 @@ export class UnweightedAlgorithmsService {
         neighbors.push(neighbor);
       }
     }
-    if (gridArray[row][col - 1]) {
-      neighbor = `${row}-${col - 1}`;
+    if (gridArray[row][col + 1]) {
+      neighbor = `${row}-${col + 1}`;
       if (nodes[neighbor].status !== 'wall') {
         neighbors.push(neighbor);
       }
@@ -56,8 +56,8 @@ export class UnweightedAlgorithmsService {
         neighbors.push(neighbor);
       }
     }
-    if (gridArray[row][col + 1]) {
-      neighbor = `${row}-${col + 1}`;
+    if (gridArray[row][col - 1]) {
+      neighbor = `${row}-${col - 1}`;
       if (nodes[neighbor].status !== 'wall') {
         neighbors.push(neighbor);
       }
