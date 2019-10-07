@@ -15,11 +15,9 @@ export class SidebarService {
 
   showSideBar() {
     this.open.next(true);
-    document.body.classList.add('blur');
   }
 
   hideSideBar() {
     this.open.next(false);
-    document.body.classList.remove('blur');
   }
 }
