@@ -8,6 +8,7 @@ import { GridAnimationService } from 'src/app/services/grid-animation.service';
   styleUrls: ['./visualizer.component.scss']
 })
 export class VisualizerComponent implements OnInit {
+  openSettings: boolean;
 
   constructor(
     private pathFinderService: PathFinderService,
@@ -24,5 +25,9 @@ export class VisualizerComponent implements OnInit {
   onVisualize() {
     this.pathFinderService.runAlgorithm();
     this.gridAnimationService.animateAlgorithm();
+  }
+
+  onSettingsButtonClick() {
+    this.openSettings = true;
   }
 }
