@@ -1,6 +1,7 @@
-<div class="wrapper">
+<div class="home">
     <app-navbar class="navbar"></app-navbar>
-    <div class="content">
+    <div class="content" id="home-content">
         <app-visualizer></app-visualizer>
     </div>
+    <app-sidebar class="sidebar" [ngClass]="{'open': open}"></app-sidebar>
 </div>

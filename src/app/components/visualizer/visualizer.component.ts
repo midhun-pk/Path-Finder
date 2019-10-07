@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PathFinderService } from 'src/app/services/path-finder.service';
 import { GridAnimationService } from 'src/app/services/grid-animation.service';
+import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
   selector: 'app-visualizer',
@@ -8,11 +9,11 @@ import { GridAnimationService } from 'src/app/services/grid-animation.service';
   styleUrls: ['./visualizer.component.scss']
 })
 export class VisualizerComponent implements OnInit {
-  openSettings: boolean;
 
   constructor(
     private pathFinderService: PathFinderService,
-    private gridAnimationService: GridAnimationService
+    private gridAnimationService: GridAnimationService,
+    private sidebarService: SidebarService
   ) { }
 
   ngOnInit() {
@@ -28,6 +29,6 @@ export class VisualizerComponent implements OnInit {
   }
 
   onSettingsButtonClick() {
-    this.openSettings = true;
+    this.sidebarService.showSideBar();
   }
 }
