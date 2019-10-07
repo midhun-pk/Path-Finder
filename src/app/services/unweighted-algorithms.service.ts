@@ -32,6 +32,33 @@ export class UnweightedAlgorithmsService {
     return false;
   }
 
+  dfs(grid: Grid) {
+    if (!grid.start || !grid.target || grid.start === grid.target) {
+      return false;
+    }
+    const stack = [grid.nodes[grid.start]];
+    while (stack.length !== 0) {
+      const currentNode = stack.pop();
+      if (!currentNode.visited) {
+        currentNode.visited = true;
+        grid.nodesToAnimate.push(currentNode);
+      } else {
+        continue;
+      }
+      if (currentNode.id === grid.target) {
+        return true;
+      }
+      const neighbors = this.getNeighbors(currentNode, grid.nodes, grid.gridArray);
+      neighbors.forEach(neighbor => {
+        if (!grid.nodes[neighbor].visited) {
+          grid.nodes[neighbor].previousNode = currentNode.id;
+          stack.push(grid.nodes[neighbor]);
+        }
+      });
+    }
+    return false;
+  }
+
   getNeighbors(currentNode: Node, nodes: { [id: string]: Node }, gridArray: Node[][]): string[] {
     const neighbors: string[] = [];
     const coordinates = currentNode.id.split('-');
