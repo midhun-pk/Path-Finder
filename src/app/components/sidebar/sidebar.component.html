@@ -4,11 +4,11 @@
             <div class="close" (click)="onCloseSideBarClick()"></div>
         </div>
         <div class="menu-items">
-            <div class="menu">Algorithms</div>
+            <div class="menu" (click)="onMenuClick()">Algorithms</div>
             <div class="menu">Mazes</div>
             <div class="menu">Add a bomb</div>
             <div class="menu">Reset board</div>
         </div>
     </div>
-    <div class="right-content"></div>
+    <div class="right-content" [ngClass]="{'active': active}"></div>
 </div>

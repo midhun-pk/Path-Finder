@@ -7,6 +7,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  active: boolean;
 
   constructor(private sidebarService: SidebarService) { }
 
@@ -14,7 +15,12 @@ export class SidebarComponent implements OnInit {
   }
 
   onCloseSideBarClick() {
+    this.active = false;
     this.sidebarService.hideSideBar();
+  }
+
+  onMenuClick() {
+    this.active = true;
   }
 
 }
