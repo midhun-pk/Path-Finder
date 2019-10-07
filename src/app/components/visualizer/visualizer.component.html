@@ -1,9 +1,9 @@
 <div class="wrapper">
     <div class="left-panel">
-        <button class="circle settings" (click)="onClearWalls()" title="Settings"><img src="assets/images/settings.svg"
-                alt="Settings"></button>
-        <button class="circle play" (click)="onVisualize()" title="Run"><img src="assets/images/play.svg"
-                alt="Run"></button>
+        <button class="circle settings tooltip" (click)="onClearWalls()"><img src="assets/images/settings.svg"
+                alt="Settings"><span class="tooltiptext">Settings</span></button>
+        <button class="circle play tooltip" (click)="onVisualize()"><img src="assets/images/play.svg" alt="Run"><span
+                class="tooltiptext">Run</span></button>
     </div>
     <div class="playground" #playground>
         <app-grid class="grid"></app-grid>
