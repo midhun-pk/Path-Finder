@@ -8,10 +8,9 @@
                 [ngClass]="{'active': menu.value === selectedMenu.value}">{{ menu.name }}</div>
         </div>
     </div>
-    <div class="right-menu-container" [ngClass]="{'active': active}">
-        <div class="sub-menu" *ngFor="let subMenu of subMenus">{{ subMenu.name }}</div>
-        <div class="sub-menu">Depth First Search</div>
-        <div class="sub-menu">Dijikstra's</div>
-        <div class="sub-menu">A* Search</div>
+    <div class="right-menu-container" *ngIf="selectedMenu.subMenus && selectedMenu.subMenus.length > 0"
+        [ngClass]="{'active': selectedMenu.subMenus.length > 0}">
+        <div class="sub-menu" *ngFor="let subMenu of selectedMenu.subMenus" (click)="onSubMenuClick(subMenu)"
+            [ngClass]="{'active': subMenu.value === selectedSubMenu.value }">{{ subMenu.name }}</div>
     </div>
 </div>

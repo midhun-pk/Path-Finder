@@ -7,11 +7,10 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  active: boolean;
   menus = [{
     name: 'Algorithms',
-    value: 'algorithms',
-    subMenu: [{
+    value: 'algorithm',
+    subMenus: [{
       name: 'Breadth First Search',
       value: 'bfs',
     }, {
@@ -26,9 +25,11 @@ export class SidebarComponent implements OnInit {
     }]
   }, {
     name: 'Mazes',
-    value: 'mazes'
+    value: 'maze',
+    subMenus: []
   }];
   selectedMenu = {};
+  selectedSubMenu = {};
   subMenus = [];
 
   constructor(private sidebarService: SidebarService) { }
@@ -37,14 +38,16 @@ export class SidebarComponent implements OnInit {
   }
 
   onCloseSideBarClick() {
-    this.active = false;
     this.sidebarService.hideSideBar();
     this.selectedMenu = {};
   }
 
   onMenuClick(menu) {
     this.selectedMenu = menu;
-    this.active = true;
+  }
+
+  onSubMenuClick(menu) {
+    this.selectedSubMenu = menu;
   }
 
 }

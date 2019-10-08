@@ -2,17 +2,23 @@ import { Injectable } from '@angular/core';
 import { UnweightedAlgorithmsService } from './unweighted-algorithms.service';
 import { Grid } from '../models/grid.model';
 import { GridAnimationService } from './grid-animation.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PathFinderService {
   grid: Grid;
+  algorithm: BehaviorSubject<string>;
 
   constructor(
     private unweightedAlgorithms: UnweightedAlgorithmsService,
     private gridAnimationService: GridAnimationService
   ) { }
+
+  setAlgorithm(algorithm: string) {
+    this.algorithm = new BehaviorSubject(algorithm);
+  }
 
   setGrid(grid: Grid) {
     this.grid = grid;
