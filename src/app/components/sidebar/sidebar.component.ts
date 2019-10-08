@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
   onSubMenuClick(menu: { name: string, value: string }) {
     this.selectedSubMenu = menu;
     if (this.selectedMenu.value === 'algorithm') {
-      this.pathFinderService.setAlgorithm(this.selectedSubMenu.value);
+      this.pathFinderService.setAlgorithm(this.selectedSubMenu);
     }
     this.onCloseSideBarClick();
   }
