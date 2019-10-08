@@ -1,14 +1,17 @@
 <div class="wrapper">
-    <div class="menu-container">
+    <div class="left-menu-container">
         <div class="header">
             <div class="close" (click)="onCloseSideBarClick()"></div>
         </div>
         <div class="menu-items">
-            <div class="menu" (click)="onMenuClick()">Algorithms</div>
-            <div class="menu">Mazes</div>
-            <div class="menu">Add a bomb</div>
-            <div class="menu">Reset board</div>
+            <div class="menu" *ngFor="let menu of menus" (click)="onMenuClick(menu)"
+                [ngClass]="{'active': menu.value === selectedMenu.value}">{{ menu.name }}</div>
         </div>
     </div>
-    <div class="right-content" [ngClass]="{'active': active}"></div>
+    <div class="right-menu-container" [ngClass]="{'active': active}">
+        <div class="sub-menu" *ngFor="let subMenu of subMenus">{{ subMenu.name }}</div>
+        <div class="sub-menu">Depth First Search</div>
+        <div class="sub-menu">Dijikstra's</div>
+        <div class="sub-menu">A* Search</div>
+    </div>
 </div>
