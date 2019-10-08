@@ -9,6 +9,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./visualizer.component.scss']
 })
 export class VisualizerComponent implements OnInit {
+  algorithm: { name: string, value: string };
 
   constructor(
     private pathFinderService: PathFinderService,
@@ -17,6 +18,7 @@ export class VisualizerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.pathFinderService.getAlgorithm().subscribe(algorithm => this.algorithm = algorithm);
   }
 
   onClearWalls() {
@@ -24,8 +26,10 @@ export class VisualizerComponent implements OnInit {
   }
 
   onVisualize() {
-    this.pathFinderService.runAlgorithm();
-    this.gridAnimationService.animateAlgorithm();
+    if (this.algorithm) {
+      const success = this.pathFinderService.runAlgorithm();
+      this.gridAnimationService.animateAlgorithm();
+    }
   }
 
   onSettingsButtonClick() {

@@ -9,15 +9,19 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PathFinderService {
   grid: Grid;
-  algorithm: BehaviorSubject<{ name: string, value: string }>;
+  algorithm = new BehaviorSubject<{ name: string, value: string } | null>(null);
 
   constructor(
     private unweightedAlgorithms: UnweightedAlgorithmsService,
     private gridAnimationService: GridAnimationService
   ) { }
 
-  setAlgorithm(algorithm: { name: string, value: string }) {
-    this.algorithm = new BehaviorSubject(algorithm);
+  setAlgorithm(algorithm: { name: string, value: string } | null) {
+    this.algorithm.next(algorithm);
+  }
+
+  getAlgorithm() {
+    return this.algorithm;
   }
 
   setGrid(grid: Grid) {
@@ -37,8 +41,8 @@ export class PathFinderService {
   }
 
   runAlgorithm() {
-    const algorithm = this.algorithm.getValue();
     let success: boolean;
+    const algorithm = this.algorithm.getValue();
     switch (algorithm.value) {
       case 'bfs':
         success = this.unweightedAlgorithms.bfs(this.grid);

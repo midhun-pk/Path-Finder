@@ -40,7 +40,6 @@ export class SidebarComponent implements OnInit {
   }
 
   onMenuClick(menu: Menu) {
-    console.log(menu);
     this.selectedMenu = menu;
   }
 
