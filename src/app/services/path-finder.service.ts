@@ -37,6 +37,17 @@ export class PathFinderService {
   }
 
   runAlgorithm() {
-    const success = this.unweightedAlgorithms.bfs(this.grid);
+    const algorithm = this.algorithm.getValue();
+    let success: boolean;
+    switch (algorithm) {
+      case 'bfs':
+        success = this.unweightedAlgorithms.bfs(this.grid);
+        break;
+      case 'dfs':
+        success = this.unweightedAlgorithms.dfs(this.grid);
+        break;
+      default:
+        break;
+    }
   }
 }

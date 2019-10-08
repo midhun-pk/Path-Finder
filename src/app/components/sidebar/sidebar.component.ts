@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from 'src/app/services/sidebar.service';
+import { PathFinderService } from 'src/app/services/path-finder.service';
+import { Menu, SubMenu } from 'src/app/models/menu.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,47 +9,47 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  menus = [{
-    name: 'Algorithms',
-    value: 'algorithm',
-    subMenus: [{
-      name: 'Breadth First Search',
-      value: 'bfs',
-    }, {
-      name: 'Depth First Search',
-      value: 'dfs',
-    }, {
-      name: 'Dijikstra\'s',
-      value: 'dijikstra',
-    }, {
-      name: 'A* Search',
-      value: 'astar',
-    }]
-  }, {
-    name: 'Mazes',
-    value: 'maze',
-    subMenus: []
-  }];
-  selectedMenu = {};
-  selectedSubMenu = {};
-  subMenus = [];
+  menus: Menu[] = [];
+  selectedMenu: Menu;
+  selectedSubMenu: SubMenu;
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(
+    private sidebarService: SidebarService,
+    private pathFinderService: PathFinderService
+  ) { }
 
   ngOnInit() {
+    const algorithms = new Menu();
+    algorithms.name = 'Algorithms';
+    algorithms.value = 'algorithm';
+    algorithms.subMenus.push({ name: 'Breadth First Search', value: 'bfs' });
+    algorithms.subMenus.push({ name: 'Depth First Search', value: 'dfs' });
+    algorithms.subMenus.push({ name: 'Dijikstra\'s', value: 'dijikstra' });
+    algorithms.subMenus.push({ name: 'A* Search', value: 'astar' });
+    const mazes = new Menu();
+    mazes.name = 'Mazes';
+    mazes.value = 'maze';
+    this.menus.push(algorithms);
+    this.menus.push(mazes);
   }
 
   onCloseSideBarClick() {
     this.sidebarService.hideSideBar();
-    this.selectedMenu = {};
+    this.selectedMenu = null;
+    this.selectedSubMenu = null;
   }
 
-  onMenuClick(menu) {
+  onMenuClick(menu: Menu) {
+    console.log(menu);
     this.selectedMenu = menu;
   }
 
-  onSubMenuClick(menu) {
+  onSubMenuClick(menu: { name: string, value: string }) {
     this.selectedSubMenu = menu;
+    if (this.selectedMenu.value === 'algorithm') {
+      this.pathFinderService.setAlgorithm(this.selectedSubMenu.value);
+    }
+    this.onCloseSideBarClick();
   }
 
 }

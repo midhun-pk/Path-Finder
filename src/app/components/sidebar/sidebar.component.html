@@ -5,12 +5,12 @@
         </div>
         <div class="menu-items">
             <div class="menu" *ngFor="let menu of menus" (click)="onMenuClick(menu)"
-                [ngClass]="{'active': menu.value === selectedMenu.value}">{{ menu.name }}</div>
+                [ngClass]="{'active': selectedMenu && menu.value === selectedMenu.value}">{{ menu.name }}</div>
         </div>
     </div>
-    <div class="right-menu-container" *ngIf="selectedMenu.subMenus && selectedMenu.subMenus.length > 0"
+    <div class="right-menu-container" *ngIf="selectedMenu && selectedMenu.subMenus && selectedMenu.subMenus.length > 0"
         [ngClass]="{'active': selectedMenu.subMenus.length > 0}">
         <div class="sub-menu" *ngFor="let subMenu of selectedMenu.subMenus" (click)="onSubMenuClick(subMenu)"
-            [ngClass]="{'active': subMenu.value === selectedSubMenu.value }">{{ subMenu.name }}</div>
+            [ngClass]="{'active': selectedSubMenu && subMenu.value === selectedSubMenu.value }">{{ subMenu.name }}</div>
     </div>
 </div>
