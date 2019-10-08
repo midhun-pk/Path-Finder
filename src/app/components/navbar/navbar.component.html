@@ -5,7 +5,11 @@
         </div>
         <div class="title">Path Finder</div>
     </div>
-    <div class="middle"></div>
+    <div class="middle">
+        <div class="algorithm-selected" *ngIf="algorithm">
+            {{ algorithm.name }}
+        </div>
+    </div>
     <div class="right">
         <div class="user"></div>
     </div>

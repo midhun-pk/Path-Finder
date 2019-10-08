@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PathFinderService } from 'src/app/services/path-finder.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  algorithm: { name: string, value: string };
 
-  constructor() { }
+  constructor(private pathFinderService: PathFinderService) { }
 
   ngOnInit() {
+    this.pathFinderService.getAlgorithm().subscribe(algorithm => this.algorithm = algorithm);
   }
 
 }

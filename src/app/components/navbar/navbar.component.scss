@@ -12,6 +12,7 @@
         display: flex;
         margin-left: 100px;
         cursor: pointer;
+        flex: 0 0 auto;
 
         &:hover {
             background: rgba($color: #FFFFFF, $alpha: 0.1)
@@ -32,10 +33,21 @@
     }
 
     .middle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1 0 auto;
 
+        .selected-algorithm {
+            font-size: 16px;
+        }
     }
 
     .right {
-
+        display: flex;
+        width: 200px;
+        height: 100%;
+        flex: 0 0 auto;
+        margin-right: 100px;
     }
 }
