@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PathFinderService } from 'src/app/services/path-finder.service';
 import { GridAnimationService } from 'src/app/services/grid-animation.service';
 import { SidebarService } from 'src/app/services/sidebar.service';
+import { Algorithm } from 'src/app/models/algorithm.model';
 
 @Component({
   selector: 'app-visualizer',
@@ -9,7 +10,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   styleUrls: ['./visualizer.component.scss']
 })
 export class VisualizerComponent implements OnInit {
-  algorithm: { name: string, value: string };
+  algorithm: Algorithm;
 
   constructor(
     private pathFinderService: PathFinderService,

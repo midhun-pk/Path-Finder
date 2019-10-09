@@ -3,7 +3,7 @@
         <button class="circle settings tooltip" (click)="onSettingsButtonClick()">
             <img src="assets/images/settings.svg" alt="Settings"><span class="tooltiptext">Settings</span>
         </button>
-        <button class="circle play tooltip" (click)="onVisualize()">
+        <button class="circle play tooltip" (click)="onVisualize()" [disabled]="!algorithm">
             <img src="assets/images/play.svg" alt="Run"><span class="tooltiptext">Run</span>
         </button>
     </div>
