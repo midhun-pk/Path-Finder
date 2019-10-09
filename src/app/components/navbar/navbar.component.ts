@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PathFinderService } from 'src/app/services/path-finder.service';
+import { Algorithm } from 'src/app/models/algorithm.model';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,7 @@ import { PathFinderService } from 'src/app/services/path-finder.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  algorithm: { name: string, value: string };
+  algorithm: Algorithm;
 
   constructor(private pathFinderService: PathFinderService) { }
 

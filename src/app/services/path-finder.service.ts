@@ -3,20 +3,24 @@ import { UnweightedAlgorithmsService } from './unweighted-algorithms.service';
 import { Grid } from '../models/grid.model';
 import { GridAnimationService } from './grid-animation.service';
 import { BehaviorSubject } from 'rxjs';
+import { Algorithm } from '../models/algorithm.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PathFinderService {
   grid: Grid;
-  algorithm = new BehaviorSubject<{ name: string, value: string } | null>(null);
+  algorithm = new BehaviorSubject<Algorithm | null>(null);
 
   constructor(
     private unweightedAlgorithms: UnweightedAlgorithmsService,
     private gridAnimationService: GridAnimationService
   ) { }
 
-  setAlgorithm(algorithm: { name: string, value: string } | null) {
+  setAlgorithm(option: { name: string, value: string } | null) {
+    const algorithm = new Algorithm();
+    algorithm.name = option.name;
+    algorithm.id = option.value;
     this.algorithm.next(algorithm);
   }
 
@@ -43,7 +47,7 @@ export class PathFinderService {
   runAlgorithm() {
     let success: boolean;
     const algorithm = this.algorithm.getValue();
-    switch (algorithm.value) {
+    switch (algorithm.id) {
       case 'bfs':
         success = this.unweightedAlgorithms.bfs(this.grid);
         break;
