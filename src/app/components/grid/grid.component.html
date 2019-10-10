@@ -1,5 +1,5 @@
-<div class="wrapper" #grid>
-    <table id="grid">
+<div id="grid" #grid>
+    <table>
         <tbody>
             <tr [attr.id]="'row-'+i" *ngFor="let nodes of gridArray; index as i">
                 <td *ngFor="let node of nodes" [attr.id]="node.id" [attr.class]="node.status"

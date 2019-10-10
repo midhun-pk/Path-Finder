@@ -1,22 +1,23 @@
-.wrapper {
-    width: 100%;
-    height: 100%;
-}
-
 #grid {
+
     width: 100%;
     height: 100%;
-    border-collapse: collapse;
-    background: var(--color-4);
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px rgb(0, 0, 0, .2);
+
+    table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+        background: var(--color-4);
+        border-radius: 5px;
+        box-shadow: 0px 0px 15px rgb(0, 0, 0, .2);
+    }
 
     td {
         min-width: 25px;
         min-height: 25px;
     }
 
-    &, td {
+    td {
         border: 1px solid var(--color-3);
     }
 
