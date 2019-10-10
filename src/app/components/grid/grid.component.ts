@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ChangeDetector
 import { Node } from '../../models/node.model';
 import { Grid } from 'src/app/models/grid.model';
 import { PathFinderService } from 'src/app/services/path-finder.service';
+import { GridService } from 'src/app/services/grid.service';
 
 @Component({
   selector: 'app-grid',
@@ -25,14 +26,16 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private pathFinderService: PathFinderService
+    private gridService: GridService
   ) { }
 
   ngOnInit() {
+    this.gridService.getGrid().subscribe(grid => this.grid = grid);
   }
 
   ngAfterViewInit() {
-    this.createGrid();
+    this.gridService.setGridElement(this.gridElement);
+    this.gridArray = this.gridService.createGrid();
     this.cdr.detectChanges();
   }
 
