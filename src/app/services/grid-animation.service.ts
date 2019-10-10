@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
+import { GridService } from './grid.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,10 @@ export class GridAnimationService {
   grid: Grid;
   relevantClassNames = ['start', 'target', 'visitedStartNode'];
 
-  constructor() { }
+  constructor(private gridService: GridService) { }
 
-  animateAlgorithm() {
+  animateAlgorithm(grid: Grid) {
+    this.grid = grid;
     this.timeout(0);
   }
 

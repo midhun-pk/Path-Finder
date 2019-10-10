@@ -26,7 +26,6 @@ export class PathFinderService {
     return this.algorithm;
   }
 
-
   runAlgorithm(grid) {
     let success: boolean;
     const algorithm = this.algorithm.getValue();

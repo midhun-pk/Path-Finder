@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Node } from '../../models/node.model';
 import { Grid } from 'src/app/models/grid.model';
-import { PathFinderService } from 'src/app/services/path-finder.service';
 import { GridService } from 'src/app/services/grid.service';
 
 @Component({
@@ -30,41 +29,40 @@ export class GridComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.gridService.getGrid().subscribe(grid => this.grid = grid);
   }
 
   ngAfterViewInit() {
-    this.gridService.setGridElement(this.gridElement);
-    this.gridArray = this.gridService.createGrid();
+    this.createGrid();
     this.cdr.detectChanges();
   }
 
   createGrid() {
-    this.grid = new Grid();
-    this.grid.rows = Math.floor((this.gridElement.nativeElement as HTMLElement).offsetHeight / this.nodeHeight);
-    this.grid.columns = Math.floor((this.gridElement.nativeElement as HTMLElement).offsetWidth / this.nodeWidth);
-    for (let i = 0; i < this.grid.rows; i++) {
+    const grid = new Grid();
+    grid.rows = Math.floor((this.gridElement.nativeElement as HTMLElement).offsetHeight / this.nodeHeight);
+    grid.columns = Math.floor((this.gridElement.nativeElement as HTMLElement).offsetWidth / this.nodeWidth);
+    for (let i = 0; i < grid.rows; i++) {
       const nodeArray: Node[] = [];
-      for (let j = 0; j < this.grid.columns; j++) {
+      for (let j = 0; j < grid.columns; j++) {
         const id = `${i}-${j}`;
         let status = 'normal';
-        if (i === Math.floor(this.grid.rows / 2) && j === Math.floor(this.grid.columns / 4)) {
-          this.grid.start = id;
+        if (i === Math.floor(grid.rows / 2) && j === Math.floor(grid.columns / 4)) {
+          grid.start = id;
           status = 'start';
 
-        } else if (i === Math.floor(this.grid.rows / 2) && j === Math.floor(3 * this.grid.columns / 4)) {
-          this.grid.target = id;
+        } else if (i === Math.floor(grid.rows / 2) && j === Math.floor(3 * grid.columns / 4)) {
+          grid.target = id;
           status = 'target';
         }
         const node = new Node();
         node.id = id;
         node.status = status;
         nodeArray.push(node);
-        this.grid.nodes[id] = node;
+        grid.nodes[id] = node;
       }
       this.gridArray.push(nodeArray);
     }
-    this.grid.gridArray = this.gridArray;
+    grid.gridArray = this.gridArray;
+    this.gridService.setGrid(grid);
   }
 
   onMouseDown(event: Event, currentNode: Node, element: HTMLElement) {

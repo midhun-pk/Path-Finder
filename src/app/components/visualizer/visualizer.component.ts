@@ -34,7 +34,7 @@ export class VisualizerComponent implements OnInit {
   onVisualize() {
     if (this.algorithm) {
       const success = this.pathFinderService.runAlgorithm(this.grid);
-      this.gridAnimationService.animateAlgorithm();
+      this.gridAnimationService.animateAlgorithm(this.grid);
     }
   }
 
