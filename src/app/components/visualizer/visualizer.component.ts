@@ -42,6 +42,10 @@ export class VisualizerComponent implements OnInit {
     this.gridService.reset();
   }
 
+  onClearAnimationButtonClick() {
+    this.gridAnimationService.clearAnimation();
+  }
+
   onSettingsButtonClick() {
     this.sidebarService.showSideBar();
   }

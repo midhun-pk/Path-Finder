@@ -8,6 +8,7 @@ import { GridService } from './grid.service';
 export class GridAnimationService {
   grid: Grid;
   relevantClassNames = ['start', 'target', 'visitedStartNode'];
+  animatedNodeIds: string[] = [];
 
   constructor(private gridService: GridService) { }
 
@@ -36,7 +37,29 @@ export class GridAnimationService {
           previousElement.className = 'visited';
         }
       }
+      const animatedNodeId = this.grid.nodesToAnimate[index].id;
+      if (!this.animatedNodeIds.includes(animatedNodeId)) {
+        this.animatedNodeIds.push(animatedNodeId);
+      }
       this.timeout(index + 1);
     }, 0);
+  }
+
+  clearAnimation() {
+    while (this.animatedNodeIds.length > 0) {
+      const id = this.animatedNodeIds.shift();
+      const node = this.grid.nodes[id];
+      const nodeElement = document.getElementById(id);
+      if (node.status === 'start') {
+        nodeElement.className = 'start';
+      } else if (node.status === 'target') {
+        nodeElement.className = 'target';
+      } else if (node.visited) {
+        nodeElement.className = 'normal';
+        node.status = 'normal';
+      }
+      node.visited = false;
+      node.previousNode = null;
+    }
   }
 }

@@ -52,6 +52,7 @@ export class GridService {
         nodeElement.className = status;
         node.status = status;
         node.visited = false;
+        node.previousNode = null;
       });
     });
   }
