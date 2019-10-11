@@ -35,4 +35,24 @@ export class GridService {
       }
     });
   }
+
+  reset() {
+    const grid = this.grid.getValue();
+    grid.gridArray.forEach((nodes, i) => {
+      nodes.forEach((node, j) => {
+        const nodeElement = document.getElementById(node.id);
+        let status = 'normal';
+        if (i === Math.floor(grid.rows / 2) && j === Math.floor(grid.columns / 4)) {
+          grid.start = node.id;
+          status = 'start';
+        } else if (i === Math.floor(grid.rows / 2) && j === Math.floor(3 * grid.columns / 4)) {
+          grid.target = node.id;
+          status = 'target';
+        }
+        nodeElement.className = status;
+        node.status = status;
+        node.visited = false;
+      });
+    });
+  }
 }

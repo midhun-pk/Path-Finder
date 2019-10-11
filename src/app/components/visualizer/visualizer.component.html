@@ -6,6 +6,9 @@
         <button class="circle play tooltip" (click)="onVisualize()" [disabled]="!algorithm">
             <img src="assets/images/play.svg" alt="Run"><span class="tooltiptext">Run</span>
         </button>
+        <button class="circle play tooltip" (click)="onResetButtonClick()" [disabled]="!algorithm">
+            <span class="tooltiptext">Reset</span>
+        </button>
     </div>
     <div class="playground" #playground>
         <app-grid class="grid"></app-grid>

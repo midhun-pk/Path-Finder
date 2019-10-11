@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { UnweightedAlgorithmsService } from './unweighted-algorithms.service';
 import { BehaviorSubject } from 'rxjs';
 import { Algorithm } from '../models/algorithm.model';
-import { GridService } from './grid.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +10,7 @@ export class PathFinderService {
   algorithm = new BehaviorSubject<Algorithm | null>(null);
 
   constructor(
-    private unweightedAlgorithms: UnweightedAlgorithmsService,
-    private gridService: GridService
+    private unweightedAlgorithms: UnweightedAlgorithmsService
   ) { }
 
   setAlgorithm(option: { name: string, value: string } | null) {

@@ -38,6 +38,10 @@ export class VisualizerComponent implements OnInit {
     }
   }
 
+  onResetButtonClick() {
+    this.gridService.reset();
+  }
+
   onSettingsButtonClick() {
     this.sidebarService.showSideBar();
   }

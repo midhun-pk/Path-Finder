@@ -62,6 +62,7 @@ export class GridComponent implements OnInit, AfterViewInit {
       this.gridArray.push(nodeArray);
     }
     grid.gridArray = this.gridArray;
+    this.grid = grid;
     this.gridService.setGrid(grid);
   }
 
