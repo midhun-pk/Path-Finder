@@ -30,6 +30,13 @@ export class GridAnimationService {
         const startElement = document.getElementById(this.grid.start);
         startElement.className = 'visitedStartNode';
       } else if (index === this.grid.nodesToAnimate.length) {
+        const previousNode = this.grid.nodesToAnimate[index - 1];
+        const previousElement = document.getElementById(previousNode.id);
+        if (previousNode.status === 'target') {
+          previousElement.className = 'visitedTargetNode';
+        } else {
+          previousElement.className = 'visited';
+        }
         this.grid.nodesToAnimate = [];
         this.isAnimating.next(false);
         return;
