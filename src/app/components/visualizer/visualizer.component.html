@@ -1,17 +1,5 @@
 <div class="wrapper">
     <div class="left-panel">
-        <button class="settings" (click)="onSettingsButtonClick()">
-            Select algorithm
-        </button>
-        <button class="play" (click)="onVisualize()" [disabled]="!algorithm">
-            Visualize
-        </button>
-        <button class="play" (click)="onResetButtonClick()" [disabled]="!algorithm">
-            Reset Grid
-        </button>
-        <button class="play" (click)="onClearAnimationButtonClick()" [disabled]="!algorithm">
-            Clear Animation
-        </button>
     </div>
     <div class="playground" #playground>
         <app-grid class="grid"></app-grid>
