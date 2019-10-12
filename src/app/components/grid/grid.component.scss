@@ -68,6 +68,10 @@
     .current {
         background-color: #E0C5E7;
     }
+
+    &.disabled {
+        pointer-events: none;
+    }
 }
 
 @keyframes special-node-animation {

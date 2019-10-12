@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, ChangeDetector
 import { Node } from '../../models/node.model';
 import { Grid } from 'src/app/models/grid.model';
 import { GridService } from 'src/app/services/grid.service';
+import { GridAnimationService } from 'src/app/services/grid-animation.service';
 
 @Component({
   selector: 'app-grid',
@@ -11,6 +12,7 @@ import { GridService } from 'src/app/services/grid.service';
 export class GridComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: false }) gridElement: ElementRef;
 
+  isAnimating: boolean;
   isMousePressed: boolean;
   pressedNodeStatus: string;
   previousNode: Node;
@@ -25,10 +27,12 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private gridService: GridService
+    private gridService: GridService,
+    private gridAnimationService: GridAnimationService
   ) { }
 
   ngOnInit() {
+    this.gridAnimationService.isCurrentlyAnimating().subscribe(isAnimating => this.isAnimating = isAnimating);
   }
 
   ngAfterViewInit() {

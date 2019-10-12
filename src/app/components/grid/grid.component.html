@@ -1,4 +1,4 @@
-<div id="grid" #grid>
+<div id="grid" [ngClass]="{'disabled': isAnimating}" #grid>
     <table>
         <tbody>
             <tr [attr.id]="'row-'+i" *ngFor="let nodes of gridArray; index as i">

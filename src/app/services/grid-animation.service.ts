@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
-import { GridService } from './grid.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class GridAnimationService {
   animatedNodeIds: string[] = [];
   isAnimating = new BehaviorSubject<boolean>(false);
 
-  constructor(private gridService: GridService) { }
+  constructor() { }
 
   isCurrentlyAnimating(): BehaviorSubject<boolean> {
     return this.isAnimating;
