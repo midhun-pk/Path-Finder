@@ -6,16 +6,16 @@
         <div class="title">Path Finder</div>
     </div>
     <div class="middle">
-        <button class="menu" onclick="">
+        <button class="menu" (click)="onSelectAlgorithmClick()">
             {{ algorithm ? algorithm.name : 'Select algorithm!' }}
         </button>
-        <button class="menu" onclick="" [disabled]="!algorithm">
+        <button class="menu" (click)="onVisualizeClick()" [disabled]="!algorithm">
             Visualize
         </button>
-        <button class="menu" onclick="" [disabled]="!algorithm">
+        <button class="menu" (click)="onResetGridClick()" [disabled]="!algorithm">
             Reset Grid
         </button>
-        <button class="menu" onclick="" [disabled]="!algorithm">
+        <button class="menu" (click)="onClearAnimationClick()" [disabled]="!algorithm">
             Clear Animation
         </button>
     </div>
