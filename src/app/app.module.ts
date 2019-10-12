@@ -8,6 +8,7 @@ import { GridComponent } from './components/grid/grid.component';
 import { VisualizerComponent } from './components/visualizer/visualizer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NodeDirective } from './directives/node.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     GridComponent,
     VisualizerComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    NodeDirective
   ],
   imports: [
     BrowserModule,

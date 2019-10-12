@@ -5,7 +5,7 @@
                 <td *ngFor="let node of nodes" [attr.id]="node.id" [attr.class]="node.status"
                     (mouseup)="onMouseUp(node)" (mousedown)="onMouseDown($event, node, nodeElement)"
                     (mouseenter)="onMouseEnter(node, nodeElement)" (mouseleave)="onMouseLeave(node, nodeElement)"
-                    #nodeElement>
+                    #nodeElement appNode [node]="node">
                 </td>
             </tr>
         </tbody>

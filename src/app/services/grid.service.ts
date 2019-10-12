@@ -28,10 +28,9 @@ export class GridService {
     const grid = this.grid.getValue();
     Object.keys(grid.nodes).forEach(id => {
       const node = grid.nodes[id];
-      const nodeElement = document.getElementById(id);
       if (node.status === 'wall') {
         node.status = 'normal';
-        nodeElement.className = 'normal';
+        node.element.className = 'normal';
       }
     });
   }
@@ -40,7 +39,6 @@ export class GridService {
     const grid = this.grid.getValue();
     grid.gridArray.forEach((nodes, i) => {
       nodes.forEach((node, j) => {
-        const nodeElement = document.getElementById(node.id);
         let status = 'normal';
         if (i === Math.floor(grid.rows / 2) && j === Math.floor(grid.columns / 4)) {
           grid.start = node.id;
@@ -49,7 +47,7 @@ export class GridService {
           grid.target = node.id;
           status = 'target';
         }
-        nodeElement.className = status;
+        node.element.className = status;
         node.status = status;
         node.visited = false;
         node.previousNode = null;

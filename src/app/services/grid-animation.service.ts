@@ -26,29 +26,26 @@ export class GridAnimationService {
   timeout(index: number) {
     setTimeout(() => {
       if (index === 0) {
-        const startElement = document.getElementById(this.grid.start);
-        startElement.className = 'visitedStartNode';
+        const startNode = this.grid.nodes[this.grid.start];
+        startNode.element.className = 'visitedStartNode';
       } else if (index === this.grid.nodesToAnimate.length) {
         const previousNode = this.grid.nodesToAnimate[index - 1];
-        const previousElement = document.getElementById(previousNode.id);
         if (previousNode.status === 'target') {
-          previousElement.className = 'visitedTargetNode';
+          previousNode.element.className = 'visitedTargetNode';
         } else {
-          previousElement.className = 'visited';
+          previousNode.element.className = 'visited';
         }
         this.grid.nodesToAnimate = [];
         this.isAnimating.next(false);
         return;
       } else {
         const currentNode = this.grid.nodesToAnimate[index];
-        const currentElement = document.getElementById(currentNode.id);
-        if (!this.relevantClassNames.includes(currentElement.className)) {
-          currentElement.className = 'current';
+        if (!this.relevantClassNames.includes(currentNode.element.className)) {
+          currentNode.element.className = 'current';
         }
         const previousNode = this.grid.nodesToAnimate[index - 1];
-        const previousElement = document.getElementById(previousNode.id);
-        if (!this.relevantClassNames.includes(previousElement.className)) {
-          previousElement.className = 'visited';
+        if (!this.relevantClassNames.includes(previousNode.element.className)) {
+          previousNode.element.className = 'visited';
         }
       }
       const animatedNodeId = this.grid.nodesToAnimate[index].id;
@@ -63,13 +60,12 @@ export class GridAnimationService {
     while (this.animatedNodeIds.length > 0) {
       const id = this.animatedNodeIds.shift();
       const node = grid.nodes[id];
-      const nodeElement = document.getElementById(id);
       if (node.status === 'start') {
-        nodeElement.className = 'start';
+        node.element.className = 'start';
       } else if (node.status === 'target') {
-        nodeElement.className = 'target';
+        node.element.className = 'target';
       } else if (node.visited) {
-        nodeElement.className = 'normal';
+        node.element.className = 'normal';
         node.status = 'normal';
       }
       node.visited = false;
