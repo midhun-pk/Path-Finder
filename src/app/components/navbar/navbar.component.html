@@ -7,16 +7,19 @@
     </div>
     <div class="middle">
         <button class="menu" (click)="onSelectAlgorithmClick()">
-            {{ algorithm ? algorithm.name : 'Select algorithm!' }}
+            {{ algorithm ? 'Algorithms' : 'Select algorithm!' }}
         </button>
         <button class="menu" (click)="onVisualizeClick()" [disabled]="!algorithm">
-            Visualize
+            {{ algorithm ? 'Visualize ' + algorithm.alias + '!' : 'Visualize' }}
         </button>
         <button class="menu" (click)="onResetGridClick()" [disabled]="!algorithm">
             Reset Grid
         </button>
         <button class="menu" (click)="onClearAnimationClick()" [disabled]="!algorithm">
             Clear Animation
+        </button>
+        <button class="menu" (click)="onClearWallsClick()">
+            Clear Walls
         </button>
     </div>
     <div class="right">

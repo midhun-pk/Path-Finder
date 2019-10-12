@@ -13,10 +13,11 @@ export class PathFinderService {
     private unweightedAlgorithms: UnweightedAlgorithmsService
   ) { }
 
-  setAlgorithm(option: { name: string, value: string } | null) {
+  setAlgorithm(option: { name: string, alias: string, value: string } | null) {
     const algorithm = new Algorithm();
     algorithm.name = option.name;
     algorithm.id = option.value;
+    algorithm.alias = option.alias;
     this.algorithm.next(algorithm);
   }
 

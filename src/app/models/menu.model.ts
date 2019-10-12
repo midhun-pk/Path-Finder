@@ -1,5 +1,6 @@
 export class SubMenu {
     name: string;
+    alias: string;
     value: string;
 }
 

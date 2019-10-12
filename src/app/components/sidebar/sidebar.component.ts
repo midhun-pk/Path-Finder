@@ -22,10 +22,10 @@ export class SidebarComponent implements OnInit {
     const algorithms = new Menu();
     algorithms.name = 'Algorithms';
     algorithms.value = 'algorithm';
-    algorithms.subMenus.push({ name: 'Breadth First Search', value: 'bfs' });
-    algorithms.subMenus.push({ name: 'Depth First Search', value: 'dfs' });
-    algorithms.subMenus.push({ name: 'Dijikstra\'s', value: 'dijikstra' });
-    algorithms.subMenus.push({ name: 'A* Search', value: 'astar' });
+    algorithms.subMenus.push({ name: 'Breadth First Search', alias: 'BFS', value: 'bfs' });
+    algorithms.subMenus.push({ name: 'Depth First Search', alias: 'DFS', value: 'dfs' });
+    algorithms.subMenus.push({ name: 'Dijikstra\'s', alias: 'Dijikstra\'s', value: 'dijikstra' });
+    algorithms.subMenus.push({ name: 'A* Search', alias: 'A* Searc', value: 'astar' });
     const mazes = new Menu();
     mazes.name = 'Mazes';
     mazes.value = 'maze';
@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit {
     this.selectedMenu = menu;
   }
 
-  onSubMenuClick(menu: { name: string, value: string }) {
+  onSubMenuClick(menu: { name: string, alias: string, value: string }) {
     this.selectedSubMenu = menu;
     if (this.selectedMenu.value === 'algorithm') {
       this.pathFinderService.setAlgorithm(this.selectedSubMenu);

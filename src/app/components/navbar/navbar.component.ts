@@ -46,4 +46,8 @@ export class NavbarComponent implements OnInit {
     this.gridAnimationService.clearAnimation();
   }
 
+  onClearWallsClick() {
+    this.gridService.clearWalls();
+  }
+
 }
