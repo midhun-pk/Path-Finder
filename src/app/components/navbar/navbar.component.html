@@ -6,9 +6,18 @@
         <div class="title">Path Finder</div>
     </div>
     <div class="middle">
-        <div class="algorithm-selected">
+        <button class="menu" onclick="">
             {{ algorithm ? algorithm.name : 'Select algorithm!' }}
-        </div>
+        </button>
+        <button class="menu" onclick="" [disabled]="!algorithm">
+            Visualize
+        </button>
+        <button class="menu" onclick="" [disabled]="!algorithm">
+            Reset Grid
+        </button>
+        <button class="menu" onclick="" [disabled]="!algorithm">
+            Clear Animation
+        </button>
     </div>
     <div class="right">
         <div class="user"></div>
