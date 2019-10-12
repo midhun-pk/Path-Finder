@@ -9,16 +9,16 @@
         <button class="menu" (click)="onSelectAlgorithmClick()">
             {{ algorithm ? 'Algorithms' : 'Select algorithm!' }}
         </button>
-        <button class="menu" (click)="onVisualizeClick()" [disabled]="!algorithm">
+        <button class="menu" (click)="onVisualizeClick()" [disabled]="!isVisualizeButtonActive()">
             {{ algorithm ? 'Visualize ' + algorithm.alias + '!' : 'Visualize' }}
         </button>
-        <button class="menu" (click)="onResetGridClick()" [disabled]="!algorithm">
+        <button class="menu" (click)="onResetGridClick()" [disabled]="!isResetGridButtonActive()">
             Reset Grid
         </button>
-        <button class="menu" (click)="onClearAnimationClick()" [disabled]="!algorithm">
+        <button class="menu" (click)="onClearAnimationClick()" [disabled]="!isClearAnimationButtonActive()">
             Clear Animation
         </button>
-        <button class="menu" (click)="onClearWallsClick()">
+        <button class="menu" (click)="onClearWallsClick()" [disabled]="!isResetWallsButtonActive()">
             Clear Walls
         </button>
     </div>

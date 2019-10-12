@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { GridService } from './grid.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,16 @@ export class GridAnimationService {
   grid: Grid;
   relevantClassNames = ['start', 'target', 'visitedStartNode'];
   animatedNodeIds: string[] = [];
+  isAnimating = new BehaviorSubject<boolean>(false);
 
   constructor(private gridService: GridService) { }
 
+  isCurrentlyAnimating(): BehaviorSubject<boolean> {
+    return this.isAnimating;
+  }
+
   animateAlgorithm(grid: Grid) {
+    this.isAnimating.next(true);
     this.grid = grid;
     this.timeout(0);
   }
@@ -24,6 +31,7 @@ export class GridAnimationService {
         startElement.className = 'visitedStartNode';
       } else if (index === this.grid.nodesToAnimate.length) {
         this.grid.nodesToAnimate = [];
+        this.isAnimating.next(false);
         return;
       } else {
         const currentNode = this.grid.nodesToAnimate[index];
@@ -45,10 +53,10 @@ export class GridAnimationService {
     }, 0);
   }
 
-  clearAnimation() {
+  clearAnimation(grid: Grid) {
     while (this.animatedNodeIds.length > 0) {
       const id = this.animatedNodeIds.shift();
-      const node = this.grid.nodes[id];
+      const node = grid.nodes[id];
       const nodeElement = document.getElementById(id);
       if (node.status === 'start') {
         nodeElement.className = 'start';

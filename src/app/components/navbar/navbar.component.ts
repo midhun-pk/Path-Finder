@@ -14,6 +14,7 @@ import { Grid } from 'src/app/models/grid.model';
 export class NavbarComponent implements OnInit {
   grid: Grid;
   algorithm: Algorithm;
+  isAnimating: boolean;
 
   constructor(
     private pathFinderService: PathFinderService,
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.pathFinderService.getAlgorithm().subscribe(algorithm => this.algorithm = algorithm);
     this.gridService.getGrid().subscribe(grid => this.grid = grid);
+    this.gridAnimationService.isCurrentlyAnimating().subscribe(isAnimating => this.isAnimating = isAnimating);
   }
 
   onSelectAlgorithmClick() {
@@ -33,6 +35,7 @@ export class NavbarComponent implements OnInit {
 
   onVisualizeClick() {
     if (this.algorithm) {
+      this.gridAnimationService.clearAnimation(this.grid);
       const success = this.pathFinderService.runAlgorithm(this.grid);
       this.gridAnimationService.animateAlgorithm(this.grid);
     }
@@ -43,11 +46,26 @@ export class NavbarComponent implements OnInit {
   }
 
   onClearAnimationClick() {
-    this.gridAnimationService.clearAnimation();
+    this.gridAnimationService.clearAnimation(this.grid);
   }
 
   onClearWallsClick() {
     this.gridService.clearWalls();
   }
 
+  isVisualizeButtonActive(): boolean {
+    return this.algorithm && !this.isAnimating;
+  }
+
+  isResetGridButtonActive(): boolean {
+    return !this.isAnimating;
+  }
+
+  isClearAnimationButtonActive(): boolean {
+    return !this.isAnimating;
+  }
+
+  isResetWallsButtonActive(): boolean {
+    return !this.isAnimating;
+  }
 }
