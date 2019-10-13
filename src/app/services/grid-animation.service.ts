@@ -78,8 +78,9 @@ export class GridAnimationService {
         className += '-' + direction;
       }
       if (index === 0) {
-        currentNode.element.className = className;
-      } else if (index === grid.shortestPathNodesToAnimate.length) {
+        currentNode.element.className = 'shortest-path-start';
+      } else if (index === grid.shortestPathNodesToAnimate.length - 1) {
+        currentNode.element.className = 'shortest-path-target';
         this.isAnimating.next(false);
         return;
       } else {
