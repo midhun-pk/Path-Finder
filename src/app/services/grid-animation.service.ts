@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class GridAnimationService {
-  grid: Grid;
   relevantClassNames = ['start', 'target', 'visitedStartNode'];
   animatedNodeIds: string[] = [];
   isAnimating = new BehaviorSubject<boolean>(false);
@@ -19,41 +18,67 @@ export class GridAnimationService {
 
   animateAlgorithm(grid: Grid) {
     this.isAnimating.next(true);
-    this.grid = grid;
-    this.timeout(0);
+    this.animateAlgorithmTimeout(grid, 0);
   }
 
-  timeout(index: number) {
+  animateAlgorithmTimeout(grid: Grid, index: number) {
     setTimeout(() => {
       if (index === 0) {
-        const startNode = this.grid.nodes[this.grid.start];
+        const startNode = grid.nodes[grid.start];
         startNode.element.className = 'visitedStartNode';
-      } else if (index === this.grid.nodesToAnimate.length) {
-        const previousNode = this.grid.nodesToAnimate[index - 1];
+      } else if (index === grid.nodesToAnimate.length) {
+        const previousNode = grid.nodesToAnimate[index - 1];
         if (previousNode.status === 'target') {
           previousNode.element.className = 'visitedTargetNode';
+          this.animateShortestPath(grid);
         } else {
           previousNode.element.className = 'visited';
         }
-        this.grid.nodesToAnimate = [];
+        grid.nodesToAnimate = [];
         this.isAnimating.next(false);
         return;
       } else {
-        const currentNode = this.grid.nodesToAnimate[index];
+        const currentNode = grid.nodesToAnimate[index];
         if (!this.relevantClassNames.includes(currentNode.element.className)) {
           currentNode.element.className = 'current';
         }
-        const previousNode = this.grid.nodesToAnimate[index - 1];
+        const previousNode = grid.nodesToAnimate[index - 1];
         if (!this.relevantClassNames.includes(previousNode.element.className)) {
           previousNode.element.className = 'visited';
         }
       }
-      const animatedNodeId = this.grid.nodesToAnimate[index].id;
+      const animatedNodeId = grid.nodesToAnimate[index].id;
       if (!this.animatedNodeIds.includes(animatedNodeId)) {
         this.animatedNodeIds.push(animatedNodeId);
       }
-      this.timeout(index + 1);
+      this.animateAlgorithmTimeout(grid, index + 1);
     }, 0);
+  }
+
+  animateShortestPath(grid: Grid) {
+    grid.shortestPathNodesToAnimate = [];
+    let currentNode = grid.nodesToAnimate[grid.nodesToAnimate.length - 1];
+    while (currentNode.id !== grid.start) {
+      grid.shortestPathNodesToAnimate.push(currentNode);
+      currentNode = grid.nodes[currentNode.previousNode];
+    }
+    grid.shortestPathNodesToAnimate.push(currentNode);
+    grid.shortestPathNodesToAnimate.reverse();
+    this.animateShortestPathTimeout(grid, 0);
+  }
+
+  animateShortestPathTimeout(grid: Grid, index: number) {
+    setTimeout(() => {
+      const currentNode = grid.shortestPathNodesToAnimate[index];
+      if (index === 0) {
+        currentNode.element.className = 'shortest-path';
+      } else if (index === grid.shortestPathNodesToAnimate.length) {
+        return;
+      } else {
+        currentNode.element.className = 'shortest-path';
+      }
+      this.animateShortestPathTimeout(grid, index + 1);
+    }, 40);
   }
 
   clearAnimation(grid: Grid) {

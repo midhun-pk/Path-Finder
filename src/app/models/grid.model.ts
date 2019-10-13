@@ -7,5 +7,6 @@ export class Grid {
     target: string;
     nodes: { [id: string]: Node } = {};
     nodesToAnimate: Node[] = [];
+    shortestPathNodesToAnimate: Node[] = [];
     gridArray: Node[][] = [];
 }

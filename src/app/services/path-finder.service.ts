@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UnweightedAlgorithmsService } from './unweighted-algorithms.service';
 import { BehaviorSubject } from 'rxjs';
 import { Algorithm } from '../models/algorithm.model';
+import { Node } from '../models/node.model';
 
 @Injectable({
   providedIn: 'root'

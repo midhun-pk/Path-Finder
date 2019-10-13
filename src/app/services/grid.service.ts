@@ -1,7 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { BehaviorSubject } from 'rxjs';
-import { Node } from '../models/node.model';
 
 @Injectable({
   providedIn: 'root'
