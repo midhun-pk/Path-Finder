@@ -33,9 +33,9 @@ export class GridAnimationService {
           this.animateShortestPath(grid);
         } else {
           previousNode.element.className = 'visited';
+          this.isAnimating.next(false);
         }
         grid.nodesToAnimate = [];
-        this.isAnimating.next(false);
         return;
       } else {
         const currentNode = grid.nodesToAnimate[index];
@@ -73,6 +73,7 @@ export class GridAnimationService {
       if (index === 0) {
         currentNode.element.className = 'shortest-path';
       } else if (index === grid.shortestPathNodesToAnimate.length) {
+        this.isAnimating.next(false);
         return;
       } else {
         currentNode.element.className = 'shortest-path';

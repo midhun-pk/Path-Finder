@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     const algorithms = new Menu();
-    algorithms.name = 'Shortest Path Algorithms';
+    algorithms.name = 'Path Finding Algorithms';
     algorithms.value = 'algorithm';
     algorithms.subMenus.push({ name: 'Breadth First Search', alias: 'BFS', value: 'bfs' });
     algorithms.subMenus.push({ name: 'Depth First Search', alias: 'DFS', value: 'dfs' });
