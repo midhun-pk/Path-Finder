@@ -80,14 +80,14 @@ export class GridAnimationService {
   animateShortestPathTimeout(grid: Grid, index: number) {
     setTimeout(() => {
       const currentNode = grid.shortestPathNodesToAnimate[index];
-      let className = 'shortest-path';
+      let className = index === 0 ? 'shortest-path-start' : 'shortest-path';
       if (index < grid.shortestPathNodesToAnimate.length - 1) {
         const nextNode = grid.shortestPathNodesToAnimate[index + 1];
         const direction = this.getDirection(currentNode, nextNode);
-        className += '-' + direction;
+        className += ' ' + direction;
       }
       if (index === 0) {
-        currentNode.element.className = 'shortest-path-start';
+        currentNode.element.className = className;
       } else if (index === grid.shortestPathNodesToAnimate.length - 1) {
         currentNode.element.className = 'shortest-path-target';
         this.isAnimating.next(false);
