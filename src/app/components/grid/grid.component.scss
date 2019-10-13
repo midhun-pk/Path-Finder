@@ -74,7 +74,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        animation: shortest-path 2.0s ease-out 0s 1 alternate forwards running;
+        animation: shortest-path 1.5.0s ease-out 0s 1 alternate forwards running;
     }
 
     .shortest-path-up {
@@ -83,7 +83,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+        animation: shortest-path 1.5s ease-out 0s 1 alternate forwards running;
     }
 
     .shortest-path-right {
@@ -92,7 +92,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+        animation: shortest-path 1.5s ease-out 0s 1 alternate forwards running;
     }
 
     .shortest-path-down {
@@ -101,7 +101,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+        animation: shortest-path 1.5s ease-out 0s 1 alternate forwards running;
     }
 
     .shortest-path-left {
@@ -110,7 +110,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+        animation: shortest-path 1.5s ease-out 0s 1 alternate forwards running;
     }
 
     &.disabled {
