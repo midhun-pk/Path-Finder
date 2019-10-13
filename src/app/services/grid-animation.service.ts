@@ -22,6 +22,11 @@ export class GridAnimationService {
     this.animateAlgorithmTimeout(grid, 0);
   }
 
+  /**
+   * Animate the current running algorithm
+   * @param grid Grid model
+   * @param index Current animating index
+   */
   animateAlgorithmTimeout(grid: Grid, index: number) {
     setTimeout(() => {
       if (index === 0) {
