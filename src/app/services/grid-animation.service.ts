@@ -61,6 +61,10 @@ export class GridAnimationService {
     }, 0);
   }
 
+  /**
+   * Animate the shortest path found by the current algorithm
+   * @param grid Grid model
+   */
   animateShortestPath(grid: Grid) {
     grid.shortestPathNodesToAnimate = [];
     let currentNode = grid.nodesToAnimate[grid.nodesToAnimate.length - 1];
