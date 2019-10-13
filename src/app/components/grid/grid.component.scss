@@ -68,14 +68,49 @@
     .current {
         background-color: #E0C5E7;
     }
-
+    
     .shortest-path {
         background-color: rgb(255, 254, 106);
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        border: 1px solid white;
         animation: shortest-path 2.0s ease-out 0s 1 alternate forwards running;
+    }
+
+    .shortest-path-up {
+        background-image: url("../../../assets/images/up.svg");
+        background-color: rgb(255, 254, 106);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+    }
+
+    .shortest-path-right {
+        background-image: url("../../../assets/images/right.svg");
+        background-color: rgb(255, 254, 106);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+    }
+
+    .shortest-path-down {
+        background-image: url("../../../assets/images/down.svg");
+        background-color: rgb(255, 254, 106);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
+    }
+
+    .shortest-path-left {
+        background-image: url("../../../assets/images/left.svg");
+        background-color: rgb(255, 254, 106);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: shortest-path 1s ease-out 0s 1 alternate forwards running;
     }
 
     &.disabled {
@@ -155,13 +190,21 @@
 
 @keyframes shortest-path {
     0% {
-        transform: scale(.2);
+        transform: scale(.6);
     }
 
-    50% {
-        transform: scale(1.2);
+    20% {
+        ransform: scale(1.05);
+        background-image: none;
     }
+
+    30% {
+        transform: scale(1.05);
+        background-image: none;
+    }
+
     100% {
-        transform: scale(1);
+        transform: scale(1.05);
+        background-image: none;
     }
 }

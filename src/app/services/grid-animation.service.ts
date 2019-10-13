@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { BehaviorSubject } from 'rxjs';
+import { Node } from '../models/node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,16 +71,42 @@ export class GridAnimationService {
   animateShortestPathTimeout(grid: Grid, index: number) {
     setTimeout(() => {
       const currentNode = grid.shortestPathNodesToAnimate[index];
+      let className = 'shortest-path';
+      if (index < grid.shortestPathNodesToAnimate.length - 1) {
+        const nextNode = grid.shortestPathNodesToAnimate[index + 1];
+        const direction = this.getDirection(currentNode, nextNode);
+        className += '-' + direction;
+      }
       if (index === 0) {
-        currentNode.element.className = 'shortest-path';
+        currentNode.element.className = className;
       } else if (index === grid.shortestPathNodesToAnimate.length) {
         this.isAnimating.next(false);
         return;
       } else {
-        currentNode.element.className = 'shortest-path';
+        currentNode.element.className = className;
       }
       this.animateShortestPathTimeout(grid, index + 1);
     }, 40);
+  }
+
+  getDirection(currentNode: Node, nextNode: Node): string {
+    let coordinates = currentNode.id.split('-');
+    const currentRow = parseInt(coordinates[0], 10);
+    const currentCol = parseInt(coordinates[1], 10);
+    coordinates = nextNode.id.split('-');
+    const nextRow = parseInt(coordinates[0], 10);
+    const nextCol = parseInt(coordinates[1], 10);
+    let direction = '';
+    if (nextRow > currentRow) {
+      direction = 'down';
+    } else if (nextRow < currentRow) {
+      direction = 'up';
+    } else if (nextCol > currentCol) {
+      direction = 'right';
+    } else if (nextCol < currentCol) {
+      direction = 'left';
+    }
+    return direction;
   }
 
   clearAnimation(grid: Grid) {
