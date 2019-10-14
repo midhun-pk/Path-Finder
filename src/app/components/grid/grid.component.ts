@@ -37,7 +37,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.createGrid();
-    this.cdr.detectChanges();
+    this.cdr.detectChanges(); // Render grid after creating it
   }
 
   createGrid() {
