@@ -10,6 +10,7 @@ export class GridAnimationService {
   relevantClassNames = ['start', 'target', 'visitedStartNode'];
   animatedNodeIds: string[] = [];
   isAnimating = new BehaviorSubject<boolean>(false);
+  isPathFindingAlgorithmVisualized = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
@@ -42,6 +43,7 @@ export class GridAnimationService {
           this.isAnimating.next(false);
         }
         grid.nodesToAnimate = [];
+        this.isPathFindingAlgorithmVisualized.next(true);
         return;
       } else {
         const currentNode = grid.nodesToAnimate[index];
@@ -134,5 +136,7 @@ export class GridAnimationService {
       node.visited = false;
       node.previousNode = null;
     }
+    this.isPathFindingAlgorithmVisualized.next(true);
   }
+
 }
