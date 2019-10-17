@@ -55,7 +55,8 @@ export class GridService {
     });
   }
 
-  getNeighbors(currentNode: Node, forbiddenNodes: string[]): string[] {
+  getNeighbors(currentNode: Node, forbiddenNodes: string[], skipCount?: number): string[] {
+    const distance = skipCount ? 1 + skipCount : 1;
     const grid = this.grid.getValue();
     const gridArray = grid.gridArray;
     const nodes = grid.nodes;
@@ -64,26 +65,26 @@ export class GridService {
     const row = parseInt(coordinates[0], 10);
     const col = parseInt(coordinates[1], 10);
     let neighbor: string;
-    if (gridArray[row - 1]) {
-      neighbor = `${row - 1}-${col}`;
+    if (gridArray[row - distance]) {
+      neighbor = `${row - distance}-${col}`;
       if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }
-    if (gridArray[row][col + 1]) {
-      neighbor = `${row}-${col + 1}`;
+    if (gridArray[row][col + distance]) {
+      neighbor = `${row}-${col + distance}`;
       if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }
-    if (gridArray[row + 1]) {
-      neighbor = `${row + 1}-${col}`;
+    if (gridArray[row + distance]) {
+      neighbor = `${row + distance}-${col}`;
       if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }
-    if (gridArray[row][col - 1]) {
-      neighbor = `${row}-${col - 1}`;
+    if (gridArray[row][col - distance]) {
+      neighbor = `${row}-${col - distance}`;
       if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
