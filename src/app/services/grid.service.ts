@@ -1,7 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { BehaviorSubject } from 'rxjs';
-import { Node } from '../models/node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -110,5 +109,33 @@ export class GridService {
       direction = 'left';
     }
     return direction;
+  }
+
+  getConnectingNodes(currentNodeId: string, nextNodeId: string): string[] {
+    let coordinates = currentNodeId.split('-');
+    const currentRow = parseInt(coordinates[0], 10);
+    const currentCol = parseInt(coordinates[1], 10);
+    coordinates = nextNodeId.split('-');
+    const nextRow = parseInt(coordinates[0], 10);
+    const nextCol = parseInt(coordinates[1], 10);
+    const nodeIds: string[] = [];
+    if (nextRow > currentRow) {
+      for (let i = currentRow + 1; i < nextRow; i++) {
+        nodeIds.push(`${i}-${currentCol}`);
+      }
+    } else if (nextRow < currentRow) {
+      for (let i = nextRow + 1; i < currentRow; i++) {
+        nodeIds.push(`${i}-${currentCol}`);
+      }
+    } else if (nextCol > currentCol) {
+      for (let i = currentCol + 1; i < nextCol; i++) {
+        nodeIds.push(`${currentRow}-${i}`);
+      }
+    } else if (nextCol < currentCol) {
+      for (let i = nextCol + 1; i < currentCol; i++) {
+        nodeIds.push(`${currentRow}-${i}`);
+      }
+    }
+    return nodeIds;
   }
 }
