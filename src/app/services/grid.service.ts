@@ -55,7 +55,7 @@ export class GridService {
     });
   }
 
-  getNeighbors(currentNode: Node, blockedNeighbors: string[]): string[] {
+  getNeighbors(currentNode: Node, forbiddenNodes: string[]): string[] {
     const grid = this.grid.getValue();
     const gridArray = grid.gridArray;
     const nodes = grid.nodes;
@@ -66,25 +66,25 @@ export class GridService {
     let neighbor: string;
     if (gridArray[row - 1]) {
       neighbor = `${row - 1}-${col}`;
-      if (!blockedNeighbors.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }
     if (gridArray[row][col + 1]) {
       neighbor = `${row}-${col + 1}`;
-      if (!blockedNeighbors.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }
     if (gridArray[row + 1]) {
       neighbor = `${row + 1}-${col}`;
-      if (!blockedNeighbors.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }
     if (gridArray[row][col - 1]) {
       neighbor = `${row}-${col - 1}`;
-      if (!blockedNeighbors.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
         neighbors.push(neighbor);
       }
     }

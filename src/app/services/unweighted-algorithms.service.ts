@@ -13,7 +13,7 @@ export class UnweightedAlgorithmsService {
     if (!grid.start || !grid.target || grid.start === grid.target) {
       return false;
     }
-    const blockedNeighbors = ['wall'];
+    const forbiddenNodes = ['wall'];
     const deque = [grid.nodes[grid.start]];
     while (deque.length !== 0) {
       const currentNode = deque.shift();
@@ -22,7 +22,7 @@ export class UnweightedAlgorithmsService {
       if (currentNode.id === grid.target) {
         return true;
       }
-      const neighbors = this.gridService.getNeighbors(currentNode, blockedNeighbors);
+      const neighbors = this.gridService.getNeighbors(currentNode, forbiddenNodes);
       neighbors.forEach(neighbor => {
         if (!grid.nodes[neighbor].visited && !deque.includes(grid.nodes[neighbor])) {
           grid.nodes[neighbor].previousNode = currentNode.id;
@@ -37,7 +37,7 @@ export class UnweightedAlgorithmsService {
     if (!grid.start || !grid.target || grid.start === grid.target) {
       return false;
     }
-    const blockedNeighbors = ['wall'];
+    const forbiddenNodes = ['wall'];
     const stack = [grid.nodes[grid.start]];
     while (stack.length !== 0) {
       const currentNode = stack.pop();
@@ -50,7 +50,7 @@ export class UnweightedAlgorithmsService {
       if (currentNode.id === grid.target) {
         return true;
       }
-      const neighbors = this.gridService.getNeighbors(currentNode, blockedNeighbors);
+      const neighbors = this.gridService.getNeighbors(currentNode, forbiddenNodes);
       neighbors.forEach(neighbor => {
         if (!grid.nodes[neighbor].visited) {
           grid.nodes[neighbor].previousNode = currentNode.id;
