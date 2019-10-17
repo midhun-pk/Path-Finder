@@ -91,4 +91,27 @@ export class GridService {
     }
     return neighbors;
   }
+
+  getDirection(currentNodeId: string, nextNodeId: string): string {
+    let coordinates = currentNodeId.split('-');
+    const currentRow = parseInt(coordinates[0], 10);
+    const currentCol = parseInt(coordinates[1], 10);
+    coordinates = nextNodeId.split('-');
+    const nextRow = parseInt(coordinates[0], 10);
+    const nextCol = parseInt(coordinates[1], 10);
+    let direction;
+    if (currentRow - nextRow > 0) {
+      direction = 'SOUTH';
+    }
+    if (currentRow - nextRow < 0) {
+      direction = 'NORTH';
+    }
+    if (currentCol - nextCol > 0) {
+      direction = 'EAST';
+    }
+    if (currentCol - nextCol < 0) {
+      direction = 'WEST';
+    }
+    return direction;
+  }
 }
