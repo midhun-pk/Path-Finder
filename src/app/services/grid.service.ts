@@ -99,18 +99,15 @@ export class GridService {
     coordinates = nextNodeId.split('-');
     const nextRow = parseInt(coordinates[0], 10);
     const nextCol = parseInt(coordinates[1], 10);
-    let direction;
-    if (currentRow - nextRow > 0) {
-      direction = 'SOUTH';
-    }
-    if (currentRow - nextRow < 0) {
-      direction = 'NORTH';
-    }
-    if (currentCol - nextCol > 0) {
-      direction = 'EAST';
-    }
-    if (currentCol - nextCol < 0) {
-      direction = 'WEST';
+    let direction = '';
+    if (nextRow > currentRow) {
+      direction = 'down';
+    } else if (nextRow < currentRow) {
+      direction = 'up';
+    } else if (nextCol > currentCol) {
+      direction = 'right';
+    } else if (nextCol < currentCol) {
+      direction = 'left';
     }
     return direction;
   }

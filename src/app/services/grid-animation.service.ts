@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { BehaviorSubject } from 'rxjs';
 import { Node } from '../models/node.model';
+import { GridService } from './grid.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class GridAnimationService {
   isAnimating = new BehaviorSubject<boolean>(false);
   isPathFindingAlgorithmVisualized = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor(private gridService: GridService) { }
 
   isCurrentlyAnimating(): BehaviorSubject<boolean> {
     return this.isAnimating;
@@ -85,7 +86,7 @@ export class GridAnimationService {
       let className = index === 0 ? 'shortest-path-start' : 'shortest-path';
       if (index < grid.shortestPathNodesToAnimate.length - 1) {
         const nextNode = grid.shortestPathNodesToAnimate[index + 1];
-        const direction = this.getDirection(currentNode, nextNode);
+        const direction = this.gridService.getDirection(currentNode.id, nextNode.id);
         className += ' ' + direction;
       }
       if (index === 0) {
@@ -99,26 +100,6 @@ export class GridAnimationService {
       }
       this.animateShortestPathTimeout(grid, index + 1);
     }, 40);
-  }
-
-  getDirection(currentNode: Node, nextNode: Node): string {
-    let coordinates = currentNode.id.split('-');
-    const currentRow = parseInt(coordinates[0], 10);
-    const currentCol = parseInt(coordinates[1], 10);
-    coordinates = nextNode.id.split('-');
-    const nextRow = parseInt(coordinates[0], 10);
-    const nextCol = parseInt(coordinates[1], 10);
-    let direction = '';
-    if (nextRow > currentRow) {
-      direction = 'down';
-    } else if (nextRow < currentRow) {
-      direction = 'up';
-    } else if (nextCol > currentCol) {
-      direction = 'right';
-    } else if (nextCol < currentCol) {
-      direction = 'left';
-    }
-    return direction;
   }
 
   clearAnimation(grid: Grid) {
