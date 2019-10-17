@@ -136,7 +136,7 @@ export class GridAnimationService {
       node.visited = false;
       node.previousNode = null;
     }
-    this.isPathFindingAlgorithmVisualized.next(true);
+    this.isPathFindingAlgorithmVisualized.next(false);
   }
 
 }
