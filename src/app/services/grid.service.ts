@@ -55,7 +55,10 @@ export class GridService {
     });
   }
 
-  getNeighbors(currentNode: Node, nodes: { [id: string]: Node }, gridArray: Node[][]): string[] {
+  getNeighbors(currentNode: Node): string[] {
+    const grid = this.grid.getValue();
+    const gridArray = grid.gridArray;
+    const nodes = grid.nodes;
     const neighbors: string[] = [];
     const coordinates = currentNode.id.split('-');
     const row = parseInt(coordinates[0], 10);
