@@ -1,6 +1,7 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { BehaviorSubject } from 'rxjs';
+import { Node } from '../models/node.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,38 @@ export class GridService {
         node.previousNode = null;
       });
     });
+  }
+
+  getNeighbors(currentNode: Node, nodes: { [id: string]: Node }, gridArray: Node[][]): string[] {
+    const neighbors: string[] = [];
+    const coordinates = currentNode.id.split('-');
+    const row = parseInt(coordinates[0], 10);
+    const col = parseInt(coordinates[1], 10);
+    let neighbor: string;
+    if (gridArray[row - 1]) {
+      neighbor = `${row - 1}-${col}`;
+      if (nodes[neighbor].status !== 'wall') {
+        neighbors.push(neighbor);
+      }
+    }
+    if (gridArray[row][col + 1]) {
+      neighbor = `${row}-${col + 1}`;
+      if (nodes[neighbor].status !== 'wall') {
+        neighbors.push(neighbor);
+      }
+    }
+    if (gridArray[row + 1]) {
+      neighbor = `${row + 1}-${col}`;
+      if (nodes[neighbor].status !== 'wall') {
+        neighbors.push(neighbor);
+      }
+    }
+    if (gridArray[row][col - 1]) {
+      neighbor = `${row}-${col - 1}`;
+      if (nodes[neighbor].status !== 'wall') {
+        neighbors.push(neighbor);
+      }
+    }
+    return neighbors;
   }
 }
