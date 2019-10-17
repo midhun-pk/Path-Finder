@@ -22,7 +22,7 @@ export class UnweightedAlgorithmsService {
       if (currentNode.id === grid.target) {
         return true;
       }
-      const neighbors = this.gridService.getNeighbors(currentNode, forbiddenNodes);
+      const neighbors = this.gridService.getNeighbors(currentNode.id, forbiddenNodes);
       neighbors.forEach(neighbor => {
         if (!grid.nodes[neighbor].visited && !deque.includes(grid.nodes[neighbor])) {
           grid.nodes[neighbor].previousNode = currentNode.id;
@@ -50,7 +50,7 @@ export class UnweightedAlgorithmsService {
       if (currentNode.id === grid.target) {
         return true;
       }
-      const neighbors = this.gridService.getNeighbors(currentNode, forbiddenNodes);
+      const neighbors = this.gridService.getNeighbors(currentNode.id, forbiddenNodes);
       neighbors.forEach(neighbor => {
         if (!grid.nodes[neighbor].visited) {
           grid.nodes[neighbor].previousNode = currentNode.id;

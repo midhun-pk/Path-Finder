@@ -55,13 +55,13 @@ export class GridService {
     });
   }
 
-  getNeighbors(currentNode: Node, forbiddenNodes: string[], skipCount?: number): string[] {
+  getNeighbors(currentNodeId: string, forbiddenNodes: string[], skipCount?: number): string[] {
     const distance = skipCount ? 1 + skipCount : 1;
     const grid = this.grid.getValue();
     const gridArray = grid.gridArray;
     const nodes = grid.nodes;
     const neighbors: string[] = [];
-    const coordinates = currentNode.id.split('-');
+    const coordinates = currentNodeId.split('-');
     const row = parseInt(coordinates[0], 10);
     const col = parseInt(coordinates[1], 10);
     let neighbor: string;
