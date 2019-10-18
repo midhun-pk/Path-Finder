@@ -36,8 +36,7 @@ export class NavbarComponent implements OnInit {
   onVisualizeClick() {
     if (this.algorithm) {
       this.gridAnimationService.clearAnimation(this.grid);
-      const success = this.pathFinderService.runAlgorithm(this.grid);
-      this.gridAnimationService.animateAlgorithm(this.grid);
+      this.pathFinderService.runPathFinderAlgorithm();
     }
   }
 
