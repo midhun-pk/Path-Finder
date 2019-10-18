@@ -10,6 +10,7 @@ export class UnweightedAlgorithmsService {
   constructor(private gridService: GridService) { }
 
   bfs(grid: Grid): boolean {
+    grid.nodesToAnimate = [];
     if (!grid.start || !grid.target || grid.start === grid.target) {
       return false;
     }
@@ -34,6 +35,7 @@ export class UnweightedAlgorithmsService {
   }
 
   dfs(grid: Grid) {
+    grid.nodesToAnimate = [];
     if (!grid.start || !grid.target || grid.start === grid.target) {
       return false;
     }
