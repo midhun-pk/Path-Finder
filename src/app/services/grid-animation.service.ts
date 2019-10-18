@@ -120,4 +120,23 @@ export class GridAnimationService {
     this.isPathFindingAlgorithmVisualized.next(false);
   }
 
+  animateMazeGenerationAlgorithm(grid: Grid) {
+    this.isAnimating.next(true);
+    this.animateMazeTimeout(grid, 0);
+  }
+
+  animateMazeTimeout(grid: Grid, index: number) {
+    setTimeout(() => {
+      if (index === grid.nodesToAnimate.length) {
+        this.isAnimating.next(false);
+        return;
+      } else {
+        const node = grid.nodesToAnimate[index];
+        node.status = 'wall';
+        node.element.className = 'wall';
+      }
+      this.animateMazeTimeout(grid, index + 1);
+    }, 0);
+  }
+
 }
