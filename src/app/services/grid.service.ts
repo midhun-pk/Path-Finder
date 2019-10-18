@@ -54,8 +54,8 @@ export class GridService {
     });
   }
 
-  getNeighbors(currentNodeId: string, forbiddenNodes: string[], skipCount?: number): string[] {
-    const distance = skipCount ? 1 + skipCount : 1;
+  getNeighbors(currentNodeId: string, forbiddenNodes: string[], nodeSkipCount?: number, skipVisited?: boolean): string[] {
+    const distance = nodeSkipCount ? 1 + nodeSkipCount : 1;
     const grid = this.grid.getValue();
     const gridArray = grid.gridArray;
     const nodes = grid.nodes;
@@ -66,25 +66,25 @@ export class GridService {
     let neighbor: string;
     if (gridArray[row - distance]) {
       neighbor = `${row - distance}-${col}`;
-      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status) && !(skipVisited && nodes[neighbor].visited)) {
         neighbors.push(neighbor);
       }
     }
     if (gridArray[row][col + distance]) {
       neighbor = `${row}-${col + distance}`;
-      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status) && !(skipVisited && nodes[neighbor].visited)) {
         neighbors.push(neighbor);
       }
     }
     if (gridArray[row + distance]) {
       neighbor = `${row + distance}-${col}`;
-      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status) && !(skipVisited && nodes[neighbor].visited)) {
         neighbors.push(neighbor);
       }
     }
     if (gridArray[row][col - distance]) {
       neighbor = `${row}-${col - distance}`;
-      if (!forbiddenNodes.includes(nodes[neighbor].status)) {
+      if (!forbiddenNodes.includes(nodes[neighbor].status) && !(skipVisited && nodes[neighbor].visited)) {
         neighbors.push(neighbor);
       }
     }
