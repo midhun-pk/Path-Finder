@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { UnweightedAlgorithmsService } from './unweighted-algorithms.service';
 import { BehaviorSubject } from 'rxjs';
 import { Algorithm } from '../models/algorithm.model';
-import { Node } from '../models/node.model';
+import { Grid } from '../models/grid.model';
+import { MazeGenerationAlgorithmService } from './maze-generation-algorithm.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class PathFinderService {
   algorithm = new BehaviorSubject<Algorithm | null>(null);
 
   constructor(
-    private unweightedAlgorithms: UnweightedAlgorithmsService
+    private unweightedAlgorithms: UnweightedAlgorithmsService,
+    private mazeGenerationAlgorithmService: MazeGenerationAlgorithmService
   ) { }
 
   setAlgorithm(option: { name: string, alias: string, value: string } | null) {
@@ -26,7 +28,7 @@ export class PathFinderService {
     return this.algorithm;
   }
 
-  runAlgorithm(grid) {
+  runAlgorithm(grid: Grid) {
     let success: boolean;
     const algorithm = this.algorithm.getValue();
     switch (algorithm.id) {
@@ -40,5 +42,15 @@ export class PathFinderService {
         break;
     }
     return success;
+  }
+
+  runMazeGenerationAlgorithm(algorithm: string) {
+    switch (algorithm) {
+      case 'rb':
+        this.mazeGenerationAlgorithmService.recursiveBacktracking();
+        break;
+      default:
+        break;
+    }
   }
 }

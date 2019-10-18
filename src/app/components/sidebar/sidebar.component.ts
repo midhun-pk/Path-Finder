@@ -29,6 +29,7 @@ export class SidebarComponent implements OnInit {
     const mazes = new Menu();
     mazes.name = 'Maze Algorithms';
     mazes.value = 'maze';
+    mazes.subMenus.push({ name: 'Recursive Backtracking', alias: 'RB', value: 'rb' });
     this.menus.push(algorithms);
     this.menus.push(mazes);
   }
@@ -47,6 +48,9 @@ export class SidebarComponent implements OnInit {
     this.selectedSubMenu = menu;
     if (this.selectedMenu.value === 'algorithm') {
       this.pathFinderService.setAlgorithm(this.selectedSubMenu);
+    }
+    if (this.selectedMenu.value === 'maze') {
+      this.pathFinderService.runMazeGenerationAlgorithm(this.selectedSubMenu.value);
     }
     this.onCloseSideBarClick();
   }
