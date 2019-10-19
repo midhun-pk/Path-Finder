@@ -22,7 +22,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   gridArray: Node[][] = [];
 
   nodeHeight = 25;
-  nodeWidth = 26;
+  nodeWidth = 25;
   specialNodeStatuses = ['start', 'target'];
 
   constructor(
@@ -44,6 +44,8 @@ export class GridComponent implements OnInit, AfterViewInit {
     const grid = new Grid();
     grid.rows = Math.floor((this.gridElement.nativeElement as HTMLElement).offsetHeight / this.nodeHeight);
     grid.columns = Math.floor((this.gridElement.nativeElement as HTMLElement).offsetWidth / this.nodeWidth);
+    grid.rows = grid.rows % 2 === 0 ? grid.rows + 1 : grid.rows;
+    grid.columns = grid.columns % 2 === 0 ? grid.columns + 1 : grid.columns;
     for (let i = 0; i < grid.rows; i++) {
       const nodeArray: Node[] = [];
       for (let j = 0; j < grid.columns; j++) {
