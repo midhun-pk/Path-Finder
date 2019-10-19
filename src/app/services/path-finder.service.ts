@@ -49,6 +49,8 @@ export class PathFinderService {
 
   runMazeGenerationAlgorithm(algorithm: string) {
     const grid = this.gridService.getGrid().getValue();
+    this.gridAnimationService.clearAnimation(grid);
+    this.gridService.clearWalls();
     switch (algorithm) {
       case 'rb':
         this.mazeGenerationAlgorithmService.recursiveBacktracking(grid);

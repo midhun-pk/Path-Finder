@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { Node } from '../models/node.model';
 import { GridService } from './grid.service';
-import { GridAnimationService } from './grid-animation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +9,16 @@ import { GridAnimationService } from './grid-animation.service';
 export class MazeGenerationAlgorithmService {
 
   constructor(
-    private gridService: GridService,
-    private gridAnimationService: GridAnimationService
+    private gridService: GridService
   ) { }
+
+  addBorderWalls() {
+
+  }
 
   recursiveBacktracking(grid: Grid) {
     const specialNodes = ['start', 'target'];
     grid.nodesToAnimate = [];
-    this.gridAnimationService.clearAnimation(grid);
-    this.gridService.clearWalls();
     const numberOfNodesVisited = 0;
     const stack: Node[] = [];
     stack.push(grid.gridArray[0][0]);
