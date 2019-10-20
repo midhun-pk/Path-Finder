@@ -1,6 +1,6 @@
 export class PriorityQueue {
     size = 0;
-    array: [string | number, number][] = [];
+    array: [string, number][] = [];
     position = {};
 
     isEmpty(): boolean {
@@ -43,14 +43,14 @@ export class PriorityQueue {
         this.array[index2] = temp;
     }
 
-    insert(node: string | number, key: number) {
+    insert(node: string, key: number) {
         this.position[node] = this.size;
         this.size += 1;
         this.array.push([node, Infinity]);
         this.decreaseKey(node, key);
     }
 
-    decreaseKey(node: string | number, key: number) {
+    decreaseKey(node: string, key: number) {
         let index = this.position[node];
         const parentIndex = this.parent(index);
         this.array[index] = [node, key];
