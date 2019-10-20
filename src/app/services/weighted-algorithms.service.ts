@@ -17,9 +17,9 @@ export class WeightedAlgorithmsService {
     if (!grid.start || !grid.target || grid.start === grid.target) {
       return false;
     }
+    let found = false;
     const forbiddenNodes = ['wall'];
-    const startNode = grid.nodes[grid.start];
-    startNode.distance = 0;
+    grid.nodes[grid.start].distance = 0;
     const PQ = new PriorityQueue();
     PQ.insert(grid.start, 0);
     while (!PQ.isEmpty()) {
@@ -29,7 +29,8 @@ export class WeightedAlgorithmsService {
         grid.nodesToAnimate.push(grid.nodes[currentNodeId]);
       }
       if (currentNodeId === grid.target) {
-        return true;
+        found = true;
+        break;
       }
       const neighbors = this.gridService.getNeighbors(currentNodeId, forbiddenNodes, 0, true);
       neighbors.forEach(neighbor => {
@@ -45,6 +46,11 @@ export class WeightedAlgorithmsService {
         }
       });
     }
-    return false;
+    while (!PQ.isEmpty()) {
+      const currentNodeId = PQ.extractMinimum();
+      grid.nodes[currentNodeId].distance = Infinity;
+      grid.nodes[currentNodeId].previousNode = null;
+    }
+    return found;
   }
 }
