@@ -85,8 +85,9 @@
       cursor: pointer;
       border-radius: 5px;
       font-size: 18px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       background-color: var(--color-7);
+      border: 2px solid var(--color-3);
 
       &:hover, &.active {
         background: var(--color-3);
