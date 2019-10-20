@@ -50,11 +50,13 @@ export class GridService {
         node.status = status;
         node.visited = false;
         node.previousNode = null;
+        node.distance = Infinity;
       });
     });
   }
 
-  getNeighbors(currentNodeId: string, forbiddenNodes: string[], nodeSkipCount?: number, skipVisited?: boolean): string[] {
+  getNeighbors(currentNodeId: string, forbiddenNodes?: string[], nodeSkipCount?: number, skipVisited?: boolean): string[] {
+    forbiddenNodes = forbiddenNodes ? forbiddenNodes : [];
     const distance = nodeSkipCount ? 1 + nodeSkipCount : 1;
     const grid = this.grid.getValue();
     const gridArray = grid.gridArray;
