@@ -43,20 +43,29 @@ export class PriorityQueue {
         this.array[index2] = temp;
     }
 
-    insert(node: string | number, priority: number) {
+    insert(node: string | number, key: number) {
         this.position[node] = this.size;
         this.size += 1;
         this.array.push([node, Infinity]);
-        this.decreasePriority(node, Infinity, priority);
+        this.decreaseKey(node, key);
     }
 
-    decreasePriority(node: string | number, oldPriority: number, newPriority: number) {
+    decreaseKey(node: string | number, key: number) {
         let index = this.position[node];
         const parentIndex = this.parent(index);
-        this.array[index] = [node, newPriority];
+        this.array[index] = [node, key];
         while (index > 0 && this.array[parentIndex][1] > this.array[index][1]) {
             this.swap(index, parentIndex);
             index = parentIndex;
         }
+    }
+
+    extractMinimum() {
+        const minimumNode = this.array[0][0];
+        this.array[0] = this.array[this.size - 1];
+        this.size -= 1;
+        this.min_heapify(0);
+        delete this.position[minimumNode];
+        return minimumNode;
     }
 }
