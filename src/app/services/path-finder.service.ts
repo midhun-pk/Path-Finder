@@ -5,6 +5,7 @@ import { Algorithm } from '../models/algorithm.model';
 import { MazeGenerationAlgorithmService } from './maze-generation-algorithm.service';
 import { GridAnimationService } from './grid-animation.service';
 import { GridService } from './grid.service';
+import { WeightedAlgorithmsService } from './weighted-algorithms.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class PathFinderService {
 
   constructor(
     private gridService: GridService,
-    private unweightedAlgorithms: UnweightedAlgorithmsService,
+    private unweightedAlgorithmsService: UnweightedAlgorithmsService,
+    private weightedAlgorithmsService: WeightedAlgorithmsService,
     private mazeGenerationAlgorithmService: MazeGenerationAlgorithmService,
     private gridAnimationService: GridAnimationService
   ) { }
@@ -36,10 +38,13 @@ export class PathFinderService {
     const algorithm = this.algorithm.getValue();
     switch (algorithm.id) {
       case 'bfs':
-        this.unweightedAlgorithms.bfs(grid);
+        this.unweightedAlgorithmsService.bfs(grid);
         break;
       case 'dfs':
-        this.unweightedAlgorithms.dfs(grid);
+        this.unweightedAlgorithmsService.dfs(grid);
+        break;
+      case 'dijikstra':
+        this.weightedAlgorithmsService.dijikstra(grid);
         break;
       default:
         break;
