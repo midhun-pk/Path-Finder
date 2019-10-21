@@ -12,6 +12,10 @@ export class WeightedAlgorithmsService {
     private gridService: GridService
   ) { }
 
+  /**
+   * Find the shortest path between start and the target nodes
+   * @param grid Grid details
+   */
   dijikstra(grid: Grid) {
     grid.nodesToAnimate = [];
     if (!grid.start || !grid.target || grid.start === grid.target) {
