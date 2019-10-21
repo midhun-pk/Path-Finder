@@ -13,7 +13,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: false }) gridElement: ElementRef;
 
   isAnimating: boolean;
-  isPathFindingAlgorithmAnimated: boolean;
+  isPathAnimated: boolean;
   isMousePressed: boolean;
   pressedNodeStatus: string;
   previousNode: Node;
@@ -34,8 +34,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.gridAnimationService.isCurrentlyAnimating().subscribe(isAnimating => this.isAnimating = isAnimating);
-    this.gridAnimationService.isPathFindingAlgorithmAnimated().subscribe(
-      isPathFindingAlgorithmAnimated => this.isPathFindingAlgorithmAnimated = isPathFindingAlgorithmAnimated);
+    this.gridAnimationService.isPathFindingAlgorithmAnimated().subscribe(isPathAnimated => this.isPathAnimated = isPathAnimated);
   }
 
   ngAfterViewInit() {
@@ -142,7 +141,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   changeNormalNode(currentNode: Node, element: HTMLElement) {
     if (!this.specialNodeStatuses.includes(currentNode.status)) {
-      const status = currentNode.status === 'wall' ? 'noraml' : 'wall';
+      const status = currentNode.status === 'wall' ? 'normal' : 'wall';
       currentNode.status = status;
       element.className = status;
     }
