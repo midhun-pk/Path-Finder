@@ -13,6 +13,7 @@ export class GridComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: false }) gridElement: ElementRef;
 
   isAnimating: boolean;
+  isPathFindingAlgorithmAnimated: boolean;
   isMousePressed: boolean;
   pressedNodeStatus: string;
   previousNode: Node;
@@ -33,6 +34,8 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.gridAnimationService.isCurrentlyAnimating().subscribe(isAnimating => this.isAnimating = isAnimating);
+    this.gridAnimationService.isPathFindingAlgorithmAnimated().subscribe(
+      isPathFindingAlgorithmAnimated => this.isPathFindingAlgorithmAnimated = isPathFindingAlgorithmAnimated);
   }
 
   ngAfterViewInit() {

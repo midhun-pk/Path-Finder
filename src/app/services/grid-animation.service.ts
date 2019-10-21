@@ -19,6 +19,10 @@ export class GridAnimationService {
     return this.isAnimating;
   }
 
+  isPathFindingAlgorithmAnimated(): BehaviorSubject<boolean> {
+    return this.isPathFindingAlgorithmVisualized;
+  }
+
   animateAlgorithm(grid: Grid) {
     this.isAnimating.next(true);
     this.animateAlgorithmTimeout(grid, 0);
