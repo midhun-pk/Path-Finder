@@ -4,5 +4,6 @@ export class Node {
     visited: boolean;
     previousNode: string;
     element: HTMLElement;
+    weight = 0;
     distance = Infinity;
 }
