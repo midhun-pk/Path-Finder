@@ -39,7 +39,12 @@
 
     .wall {
         background-color: var(--color-2);
-        animation: wall-animation .5s ease-out 0s 1 alternate forwards running;
+        animation: block-animation .5s ease-out 0s 1 alternate forwards running;
+    }
+
+    .weight {
+        background-color: var(--color-8);
+        animation: block-animation .5s ease-out 0s 1 alternate forwards running;
     }
 
     .visitedStartNode {
@@ -144,7 +149,7 @@
     }
 }
 
-@keyframes wall-animation {
+@keyframes block-animation {
     0% {
         transform: scale(.2);
     }
