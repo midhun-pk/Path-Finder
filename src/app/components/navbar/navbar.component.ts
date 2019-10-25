@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onAddWeightClick() {
+    this.gridService.toggleAddWeight();
   }
 
   isVisualizeButtonActive(): boolean {

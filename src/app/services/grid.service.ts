@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class GridService {
   grid = new BehaviorSubject<Grid | null>(null);
   gridElement: ElementRef;
+  addWeight = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
@@ -17,6 +18,10 @@ export class GridService {
 
   setGrid(grid: Grid) {
     this.grid.next(grid);
+  }
+
+  toggleAddWeight() {
+    this.addWeight.next(!this.addWeight.getValue());
   }
 
   setGridElement(gridElement: ElementRef) {
