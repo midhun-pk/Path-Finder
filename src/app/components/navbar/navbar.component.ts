@@ -52,6 +52,9 @@ export class NavbarComponent implements OnInit {
     this.gridService.clearWalls();
   }
 
+  onAddWeightClick() {
+  }
+
   isVisualizeButtonActive(): boolean {
     return this.algorithm && !this.isAnimating;
   }
@@ -65,6 +68,10 @@ export class NavbarComponent implements OnInit {
   }
 
   isResetWallsButtonActive(): boolean {
+    return !this.isAnimating;
+  }
+
+  isAddWeightButtonActive(): boolean {
     return !this.isAnimating;
   }
 }
