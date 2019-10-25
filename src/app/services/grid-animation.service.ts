@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Grid } from '../models/grid.model';
 import { BehaviorSubject } from 'rxjs';
-import { Node } from '../models/node.model';
 import { GridService } from './grid.service';
 
 @Injectable({
