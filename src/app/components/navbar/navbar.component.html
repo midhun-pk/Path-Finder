@@ -6,7 +6,7 @@
         <div class="title">Path Finder</div>
     </div>
     <div class="middle">
-        <button class="menu" (click)="onSelectAlgorithmClick()">
+        <button class="menu" (click)="onSelectAlgorithmClick()" [disabled]="isAnimating">
             {{ algorithm ? 'Algorithms' : 'Select algorithm!' }}
         </button>
         <button class="menu" (click)="onVisualizeClick()" [disabled]="!isVisualizeButtonActive()">
