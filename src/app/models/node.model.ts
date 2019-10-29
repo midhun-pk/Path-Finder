@@ -6,4 +6,5 @@ export class Node {
     element: HTMLElement;
     weight = 0;
     distance = Infinity;
+    globalDistance = Infinity;
 }
