@@ -62,6 +62,10 @@ export class WeightedAlgorithmsService {
     const currentNode = grid.nodes[grid.start];
     currentNode.distance = 0;
     currentNode.globalDistance = this.heuristic(grid.start, grid.target);
+    const deque = [grid.start];
+    while (deque.length > 0) {
+      deque.sort((a, b) => grid.nodes[a].globalDistance - grid.nodes[b].globalDistance );
+    }
   }
 
   heuristic(start: string, target: string) {
