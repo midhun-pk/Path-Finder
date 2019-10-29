@@ -145,4 +145,11 @@ export class GridService {
     }
     return nodeIds;
   }
+
+  getCoordinates(id: string) {
+    const coordinates = id.split('-');
+    const x = parseInt(coordinates[0], 10);
+    const y = parseInt(coordinates[1], 10);
+    return { x, y };
+  }
 }
