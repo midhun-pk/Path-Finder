@@ -57,4 +57,24 @@ export class WeightedAlgorithmsService {
     }
     return found;
   }
+
+  aStarSearch(grid: Grid) {
+    const currentNode = grid.nodes[grid.start];
+    currentNode.distance = 0;
+    currentNode.globalDistance = this.heuristic(grid.start, grid.target);
+  }
+
+  heuristic(start: string, target: string) {
+    let coordinates = this.gridService.getCoordinates(start);
+    const x1 = coordinates.x;
+    const y1 = coordinates.y;
+    coordinates = this.gridService.getCoordinates(target);
+    const x2 = coordinates.x;
+    const y2 = coordinates.y;
+    return this.manhattanDistance(x1, x2, y1, y2);
+  }
+
+  manhattanDistance(x1: number, y1: number, x2: number, y2: number): number {
+    return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+  }
 }
