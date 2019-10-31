@@ -68,8 +68,13 @@ export class WeightedAlgorithmsService {
     }
   }
 
-  heuristic(start: string, target: string) {
-    let coordinates = this.gridService.getCoordinates(start);
+  /**
+   * Distence between the source node and target node
+   * @param source current node that is bwing processed
+   * @param target target node to be reached
+   */
+  heuristic(source: string, target: string) {
+    let coordinates = this.gridService.getCoordinates(source);
     const x1 = coordinates.x;
     const y1 = coordinates.y;
     coordinates = this.gridService.getCoordinates(target);
@@ -78,6 +83,13 @@ export class WeightedAlgorithmsService {
     return this.manhattanDistance(x1, x2, y1, y2);
   }
 
+  /**
+   * Thw sum of horizonatal and vertical distances between points on a grid
+   * @param x1 x coordinate of the source node
+   * @param y1 y coordinate of the source node
+   * @param x2 x coordintae of the target node
+   * @param y2 y coordinate of the target node
+   */
   manhattanDistance(x1: number, y1: number, x2: number, y2: number): number {
     return Math.abs(x1 - x2) + Math.abs(y1 - y2);
   }
