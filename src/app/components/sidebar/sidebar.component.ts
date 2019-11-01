@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
     algorithms.subMenus.push({ name: 'Breadth First Search', alias: 'BFS', value: 'bfs' });
     algorithms.subMenus.push({ name: 'Depth First Search', alias: 'DFS', value: 'dfs' });
     algorithms.subMenus.push({ name: 'Dijikstra\'s', alias: 'Dijikstra\'s', value: 'dijikstra' });
-    // algorithms.subMenus.push({ name: 'A* Search', alias: 'A* Search', value: 'astar' });
+    algorithms.subMenus.push({ name: 'A* Search', alias: 'A* Search', value: 'astar' });
     const mazes = new Menu();
     mazes.name = 'Maze Algorithms';
     mazes.value = 'maze';

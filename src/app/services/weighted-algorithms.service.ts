@@ -59,13 +59,35 @@ export class WeightedAlgorithmsService {
   }
 
   aStarSearch(grid: Grid) {
-    const currentNode = grid.nodes[grid.start];
-    currentNode.distance = 0;
-    currentNode.globalDistance = this.heuristic(grid.start, grid.target);
-    const deque = [grid.start];
+    grid.nodesToAnimate = [];
+    const startNode = grid.nodes[grid.start];
+    const forbiddenNodes = ['wall'];
+    startNode.distance = 0;
+    startNode.globalDistance = this.heuristic(grid.start, grid.target);
+    const deque = [grid.nodes[grid.start]];
     while (deque.length > 0) {
-      deque.sort((a, b) => grid.nodes[a].globalDistance - grid.nodes[b].globalDistance );
+      deque.sort((a, b) => a.globalDistance - b.globalDistance );
+      const currentNode = deque.shift();
+      currentNode.visited = true;
+      grid.nodesToAnimate.push(currentNode);
+      if (currentNode.id === grid.target) {
+        return true;
+      }
+      const neighbors = this.gridService.getNeighbors(currentNode.id, forbiddenNodes, 0, true);
+      neighbors.forEach(neighbor => {
+        const neighborNode = grid.nodes[neighbor];
+        if (!deque.includes(grid.nodes[neighbor])) {
+          deque.push(neighborNode);
+        }
+        const possibleDistance = currentNode.distance + 1;
+        if (possibleDistance < neighborNode.distance) {
+          neighborNode.previousNode = currentNode.id;
+          neighborNode.distance = possibleDistance;
+          neighborNode.globalDistance = neighborNode.distance + this.heuristic(neighborNode.id, grid.target);
+        }
+      });
     }
+    return false;
   }
 
   /**

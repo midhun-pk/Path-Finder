@@ -46,6 +46,9 @@ export class PathFinderService {
       case 'dijikstra':
         this.weightedAlgorithmsService.dijikstra(grid);
         break;
+      case 'astar':
+        this.weightedAlgorithmsService.aStarSearch(grid);
+        break;
       default:
         break;
     }
