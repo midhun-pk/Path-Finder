@@ -56,6 +56,7 @@ export class GridService {
         node.visited = false;
         node.previousNode = null;
         node.distance = Infinity;
+        node.globalDistance = Infinity;
       });
     });
   }

@@ -120,6 +120,7 @@ export class GridAnimationService {
       node.visited = false;
       node.previousNode = null;
       node.distance = Infinity;
+      node.globalDistance = Infinity;
     }
     this.isPathFindingAlgorithmVisualized.next(false);
   }
