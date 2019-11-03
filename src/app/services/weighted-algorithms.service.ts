@@ -64,9 +64,9 @@ export class WeightedAlgorithmsService {
     const forbiddenNodes = ['wall'];
     startNode.distance = 0;
     startNode.globalDistance = this.heuristic(grid.start, grid.target);
-    const deque = [grid.nodes[grid.start]];
+    let deque = [grid.nodes[grid.start]];
     while (deque.length > 0) {
-      deque.sort((a, b) => a.globalDistance - b.globalDistance );
+      deque = deque.sort((a, b) => a.globalDistance - b.globalDistance );
       const currentNode = deque.shift();
       currentNode.visited = true;
       grid.nodesToAnimate.push(currentNode);
@@ -102,7 +102,7 @@ export class WeightedAlgorithmsService {
     coordinates = this.gridService.getCoordinates(target);
     const x2 = coordinates.x;
     const y2 = coordinates.y;
-    return this.manhattanDistance(x1, x2, y1, y2);
+    return this.manhattanDistance(x1, y1, x2, y2);
   }
 
   /**
