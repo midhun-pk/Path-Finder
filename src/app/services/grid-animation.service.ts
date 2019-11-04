@@ -117,6 +117,7 @@ export class GridAnimationService {
         node.element.className = 'normal';
         node.status = 'normal';
       }
+      node.weight = 0;
       node.visited = false;
       node.previousNode = null;
       node.distance = Infinity;
