@@ -23,6 +23,7 @@ export class GridAnimationService {
   }
 
   animateAlgorithm(grid: Grid) {
+    this.animatedNodeIds = [];
     this.isAnimating.next(true);
     this.animateAlgorithmTimeout(grid, 0);
   }
@@ -124,6 +125,8 @@ export class GridAnimationService {
       node.globalDistance = Infinity;
     }
     this.isPathFindingAlgorithmVisualized.next(false);
+    grid.shortestPathNodesToAnimate = [];
+    grid.nodesToAnimate = [];
   }
 
   animateMazeGenerationAlgorithm(grid: Grid) {
