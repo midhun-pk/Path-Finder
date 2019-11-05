@@ -60,8 +60,12 @@ export class WeightedAlgorithmsService {
 
   aStarSearch(grid: Grid) {
     grid.nodesToAnimate = [];
+    if (!grid.start || !grid.target || grid.start === grid.target) {
+      return false;
+    }
     const startNode = grid.nodes[grid.start];
     const forbiddenNodes = ['wall'];
+    let found = false;
     startNode.distance = 0;
     startNode.globalDistance = this.heuristic(grid.start, grid.target);
     let deque = [grid.nodes[grid.start]];
@@ -71,7 +75,8 @@ export class WeightedAlgorithmsService {
       currentNode.visited = true;
       grid.nodesToAnimate.push(currentNode);
       if (currentNode.id === grid.target) {
-        return true;
+        found = true;
+        break;
       }
       const neighbors = this.gridService.getNeighbors(currentNode.id, forbiddenNodes, 0, true);
       neighbors.forEach(neighbor => {
@@ -87,7 +92,13 @@ export class WeightedAlgorithmsService {
         }
       });
     }
-    return false;
+    while (deque.length > 0) {
+      const currentNode = deque.shift();
+      currentNode.distance = Infinity;
+      currentNode.globalDistance = Infinity;
+      currentNode.previousNode = null;
+    }
+    return found;
   }
 
   /**
