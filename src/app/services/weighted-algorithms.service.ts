@@ -58,6 +58,10 @@ export class WeightedAlgorithmsService {
     return found;
   }
 
+  /**
+   * Find the shortest path between start and the target nodes
+   * @param grid Grid details
+   */
   aStarSearch(grid: Grid) {
     grid.nodesToAnimate = [];
     if (!grid.start || !grid.target || grid.start === grid.target) {
